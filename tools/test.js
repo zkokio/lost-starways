@@ -82,3 +82,11 @@ game.newGame();
  .forEach(s => cmd(s[0], s[1]));
 console.log(failures ? "✖ goto problems" : "✔ GO TO OK");
 process.exitCode = failures ? 1 : 0;
+
+// SWITCH / TURN
+game.newGame();
+[["switch on candle", "light the candle"], ["switch translator on", "ONLINE"], ["turn off the translator", "goes quiet"],
+ ["turn translator on", "ONLINE"], ["switch the translator off", "goes quiet"], ["switch translator", "ONLINE"],
+ ["turn candle off", "pinch out"], ["turn on candle", "relight"]].forEach(s => cmd(s[0], s[1]));
+console.log(failures ? "✖ switch problems" : "✔ SWITCH / TURN OK");
+process.exitCode = failures ? 1 : 0;

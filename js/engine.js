@@ -618,7 +618,7 @@
 
   E.builtin = function (p) {
     var st = this.state, self = this, o = p.o1, d = o && this.idef(o), r = this.rdef(), see = this.canSee();
-    var needsObj = ["examine", "take", "drop", "open", "close", "unlock", "cut", "throw", "eat", "drink", "give",
+    var needsObj = ["deactivate", "examine", "take", "drop", "open", "close", "unlock", "cut", "throw", "eat", "drink", "give",
       "read", "push", "pull", "wear", "fill", "tie", "put", "peer", "pour", "fix", "light", "extinguish", "use"];
     if (p.n1 && !o && p.n1 !== "all" && needsObj.indexOf(p.verb) >= 0) {
       return this.say(see ? "You can't see any " + up(p.n1) + " here." : "It's too dark to see.");
@@ -702,6 +702,7 @@
       case "fix": return this.say("You'll need the whole ship first!");
       case "open": case "close": case "unlock": return this.say("It doesn't seem to open.");
       case "light": return this.say("You can't light that.");
+      case "deactivate": return this.say(o ? "It doesn't have an off switch." : "SWITCH OFF WHAT?");
       case "extinguish": return this.say("It isn't burning.");
     }
     var msgs = ["Nothing happens.", "You can't do that.", "That doesn't seem to work."];

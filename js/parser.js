@@ -99,6 +99,13 @@
 
     var rest = t.slice(used).filter(function (w) { return S.STOPWORDS.indexOf(w) < 0; });
 
+    // particle at the end: "switch translator off", "turn the machine on"
+    if ((verb === "use" || verb === "deactivate") && rest.length > 1) {
+      var lastW = rest[rest.length - 1];
+      if (lastW === "off") { verb = "deactivate"; rest.pop(); }
+      else if (lastW === "on") { verb = "use"; rest.pop(); }
+    }
+
     // "enter 7304" / "enter code 7304" -> type
     if ((verb === "enter" || verb === "type") && rest.some(function (w) { return /\d/.test(w); })) {
       return { verb: "type", n1: rest.filter(function (w) { return /^\d+$/.test(w); }).join(""), n2: "", raw: raw };

@@ -2,7 +2,7 @@
 (function (G) {
   var S = G.Starways = G.Starways || {};
 
-  S.VERSION = "0.2.2";
+  S.VERSION = "0.2.3";
   S.PARTS_TOTAL = 21;
   S.PIC_W = 160;   // picture is 160x100 "fat pixels", like C64 multicolour mode
   S.PIC_H = 100;
@@ -35,7 +35,8 @@
     examine: ["examine", "x", "ex", "inspect", "search", "check", "look at", "study", "investigate"],
     take: ["take", "get", "pick up", "pick", "grab", "collect", "lift"],
     drop: ["drop", "put down", "discard", "leave"],
-    use: ["use", "operate", "activate", "turn on", "switch on"],
+    use: ["use", "operate", "activate", "turn on", "switch on", "power on", "power up", "switch", "turn", "start", "boot", "engage"],
+    deactivate: ["deactivate", "turn off", "switch off", "power off", "power down", "shut off", "shut down", "disengage"],
     open: ["open", "unscrew", "pry", "prise", "force"],
     close: ["close", "shut"],
     unlock: ["unlock"],

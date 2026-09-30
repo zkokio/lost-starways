@@ -205,9 +205,9 @@ Ops draw in order, so the background goes first. To draw only when a condition i
 
 ## Verb list
 
-`go look examine take drop use open close unlock light extinguish cut throw dig eat drink give type read push pull climb run hide talk listen wear fill tie wait put peer pour jump smell enter fix knock shout attack touch heal scan`
+`go look examine take drop use open close unlock light extinguish cut throw dig eat drink give type read push pull climb run hide talk listen wear fill tie wait put peer pour jump smell enter fix knock shout attack touch heal scan deactivate`
 
-Players can use synonyms, which all map to these verbs. For example `get`/`pick up` → `take`, `look through` → `peer`, `put out` → `extinguish`, `insert` → `put`, `x` → `examine`, and `enter 1234`/`login 1234` → `type`. The full list is in `js/defs.js`.
+Players can use synonyms, which all map to these verbs. For example `get`/`pick up` → `take`, `look through` → `peer`, `put out` → `extinguish`, `insert` → `put`, `switch on`/`turn on`/`switch` → `use`, `switch off`/`turn off` → `deactivate`, `x` → `examine`, and `enter 1234`/`login 1234` → `type`. The full list is in `js/defs.js`.
 
 ## Tips
 

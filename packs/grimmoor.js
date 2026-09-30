@@ -1431,6 +1431,41 @@ Starways.addPack(
   },
   "actions": [
     {
+      "verb": "use",
+      "noun": "machine",
+      "room": "portal",
+      "if": "flag:machine_on",
+      "do": [
+        {"say": "It's already humming with power. The vortex spirals UP."}
+      ]
+    },
+    {
+      "verb": "use",
+      "noun": "machine",
+      "room": "portal",
+      "if": "!has:fuse",
+      "do": [
+        {
+          "say": "You hunt for a switch. Nothing. The machine is dead - something's missing from inside the access panel."
+        }
+      ]
+    },
+    {
+      "verb": "deactivate",
+      "noun": "machine",
+      "room": "portal",
+      "do": [
+        {"say": "And strand yourself here forever? Better not."}
+      ]
+    },
+    {
+      "verb": ["use", "deactivate"],
+      "noun": "beaconstone",
+      "do": [
+        {"say": "The beacon has no switch. It hums along on its own, remembering you."}
+      ]
+    },
+    {
       "verb": ["open", "examine"],
       "noun": "locker",
       "if": "!flag:locker_open",

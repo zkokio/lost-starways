@@ -122,6 +122,44 @@ Starways.addPack(
       ]
     },
     {
+      "verb": "deactivate",
+      "noun": "translator",
+      "if": "flag:translator_on",
+      "do": [
+        {"clear": "translator_on"},
+        {"sound": "beep"},
+        {"say": "Click. The translator goes quiet. Aliens will sound like gibberish again."}
+      ]
+    },
+    {"verb": "deactivate", "noun": "translator", "do": [{"say": "It's already off."}]},
+    {"verb": "deactivate", "noun": "candle", "do": [{"command": "extinguish candle"}]},
+    {"verb": "use", "noun": "candle", "do": [{"command": "light candle"}]},
+    {
+      "verb": "use",
+      "noun": "edriver",
+      "noun2": "",
+      "do": [
+        {
+          "say": "The electronic screwdriver buzzes into life, tip glowing blue. Try SCAN, or FIX something, or USE it ON something."
+        }
+      ]
+    },
+    {
+      "verb": "deactivate",
+      "noun": "edriver",
+      "do": [
+        {"say": "The buzzing stops. (It switches itself back on when you need it.)"}
+      ]
+    },
+    {
+      "verb": "use",
+      "noun": "medpen",
+      "noun2": "",
+      "do": [
+        {"say": "The medical pen hums, ready. USE it ON someone who's hurt, or HEAL them."}
+      ]
+    },
+    {
       "verb": ["heal", "use"],
       "noun": "medpen",
       "noun2": ["", "me", "myself", "self"],
