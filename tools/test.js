@@ -64,3 +64,11 @@ game.state.room = "grimmoor:field"; game.state.pack = "grimmoor";
  ["b", "Crystal Cave"], ["up", "Scarecrow Field"]].forEach(s => cmd(s[0], s[1]));
 console.log(failures ? "✖ side quest problems" : "✔ Side quest OK");
 process.exitCode = failures ? 1 : 0;
+
+// Typo tolerance
+game.newGame();
+[["lit candle", "light the candle"], ["exmaine panle", "HATCH LOCK"], ["opne lokcer", "ELECTRONIC SCREWDRIVER"],
+ ["tkae scredriver", "TAKEN"], ["cut red wrie", "swings open"], ["fowrard", "Crash Crater"], ["use transaltor", "ONLINE"],
+ ["inventroy", "TRANSLATOR"]].forEach(s => cmd(s[0], s[1]));
+console.log(failures ? "✖ typo problems" : "✔ Typo tolerance OK");
+process.exitCode = failures ? 1 : 0;

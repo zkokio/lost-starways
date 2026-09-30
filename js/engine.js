@@ -347,6 +347,15 @@
       });
       if (sc > bestScore) { best = k; bestScore = sc; }
     });
+    if (!best && S.fuzzy) {
+      // typo in the noun: "scredriver", "telescpoe", "hermti"
+      scope.forEach(function (k) {
+        if (best) return;
+        var d = self.idef(k); if (!d) return;
+        var ws = arr(d.words).length ? arr(d.words).map(function (w) { return String(w).toLowerCase(); }) : [k.split(":")[1]];
+        if (words.some(function (w) { return S.fuzzy(w, ws); })) best = k;
+      });
+    }
     return best;
   };
 
@@ -497,6 +506,7 @@
     var p = S.parse(text);
     if (!p) return this.say("EH?");
     if (p.system !== "restart") this.confirmRestart = false;
+    if (p.fixed) this.say("(" + p.fixed.map(up).join(", ") + ")", "sys");
     if (p.system) { this.system(p.system, p); return this.status(); }
     if (this.state.ended) { this.say("Your adventure is over for now. Type RESTART to play again.", "sys"); return; }
     if (p.unknown) { this.say("I DON'T KNOW HOW TO \"" + up(p.unknown) + "\"."); return; }

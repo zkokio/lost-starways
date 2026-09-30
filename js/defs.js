@@ -2,7 +2,7 @@
 (function (G) {
   var S = G.Starways = G.Starways || {};
 
-  S.VERSION = "0.2.0";
+  S.VERSION = "0.2.1";
   S.PARTS_TOTAL = 21;
   S.PIC_W = 160;   // picture is 160x100 "fat pixels", like C64 multicolour mode
   S.PIC_H = 100;
