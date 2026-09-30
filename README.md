@@ -78,4 +78,4 @@ Both also run automatically on GitHub for every push and pull request (`.github/
 
 ## Licence
 
-MIT © 2026 Pete Graham. Community packs keep their authors' credit.
+MIT © 2026 FlushtheFashion. Community packs keep their authors' credit.

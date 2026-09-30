@@ -5,7 +5,7 @@ Starways.addPack(
   "type": "main",
   "order": 1,
   "title": "Grimmoor",
-  "author": "Pete Graham",
+  "author": "FlushtheFashion",
   "colors": { "border": 14, "bg": 6, "text": 14 },
   "intro": "CRASH! Your escape pod slams into the purple moorland of GRIMMOOR. Three of your ship's parts are hidden somewhere in this fog-drenched land.",
   "start": "pod",

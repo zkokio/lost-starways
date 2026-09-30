@@ -162,7 +162,7 @@
     if (engine.hasSave()) print("OR TYPE RESTORE TO CONTINUE", "good");
     print("");
     print("Type HELP at any time. TAB or I shows your inventory. MODS loads community lands.", "sys");
-    print("V" + S.VERSION + "  -  (C) 2026 PETE GRAHAM", "sys");
+    print("V" + S.VERSION + "  -  (C) 2026 FLUSHTHEFASHION", "sys");
     cmd.focus();
   }
 
