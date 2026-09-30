@@ -90,6 +90,11 @@
       ops.forEach(function (op, i) {
         if (isObj(op)) { cond(op.if, where + "[" + i + "]"); return pic(op.ops, where + "[" + i + "].ops"); }
         if (!Array.isArray(op) || S.PIC_OPS.indexOf(op[0]) < 0) return err(where + "[" + i + "]: unknown drawing op " + JSON.stringify(op && op[0]));
+        if (op[0] === "sprite") {
+          if (typeof op[1] !== "number" || typeof op[2] !== "number") return err(where + "[" + i + "]: sprite needs [\"sprite\", x, y, \"row\", ...]");
+          for (var r = typeof op[3] === "number" ? 4 : 3; r < op.length; r++) if (typeof op[r] !== "string") return err(where + "[" + i + "]: sprite rows must be strings");
+          return;
+        }
         for (var k = 2; k < op.length; k++) if (typeof op[k] !== "number") return err(where + "[" + i + "]: coordinates must be numbers");
       });
     }
@@ -133,7 +138,7 @@
       if (!/^[a-z0-9_-]+$/i.test(rid)) err(w + ": room ids may only use letters, numbers, - and _");
       text(r.name, w + ".name"); if (!r.name) err(w + ": missing \"name\"");
       text(r.desc, w + ".desc"); if (!r.desc) err(w + ": missing \"desc\"");
-      ["hint", "listen", "smell"].forEach(function (f) { text(r[f], w + "." + f); });
+      ["hint", "listen", "smell", "scan"].forEach(function (f) { text(r[f], w + "." + f); });
       if (r.exits !== undefined && !isObj(r.exits)) err(w + ".exits must be an object");
       Object.keys(r.exits || {}).forEach(function (d) {
         var e = r.exits[d];
@@ -142,7 +147,7 @@
         if (!roomOk(to)) err(w + ".exits." + d + ": unknown room \"" + to + "\"");
         if (isObj(e)) { cond(e.if, w + ".exits." + d + ".if"); text(e.no, w + ".exits." + d + ".no"); text(e.die, w + ".exits." + d + ".die"); }
       });
-      arr(r.items).forEach(function (id) { if (!items[id]) err(w + ".items: \"" + id + "\" is not defined in this pack's items"); });
+      arr(r.items).forEach(function (id) { if (!items[id] && !core[id]) err(w + ".items: \"" + id + "\" is not defined in this pack's items"); });
       if (r.extra) arr(r.extra).forEach(function (x, i) { cond(x.if, w + ".extra[" + i + "]"); text(x.text, w + ".extra[" + i + "]"); });
       if (r.onEnter) actions(r.onEnter, w + ".onEnter");
       pic(r.pic, w + ".pic");
@@ -153,7 +158,7 @@
       var it = items[id], w = "items." + id;
       if (!isObj(it)) return err(w + " must be an object");
       if (!/^[a-z0-9_-]+$/i.test(id)) err(w + ": item ids may only use letters, numbers, - and _");
-      text(it.name, w + ".name"); text(it.desc, w + ".desc"); text(it.read, w + ".read"); text(it.talk, w + ".talk");
+      text(it.name, w + ".name"); text(it.desc, w + ".desc"); text(it.read, w + ".read"); text(it.talk, w + ".talk"); text(it.scan, w + ".scan");
       if (it.words !== undefined && (!Array.isArray(it.words) || it.words.some(function (x) { return typeof x !== "string"; }))) err(w + ".words must be an array of strings");
       if (!it.words) warn(w + ": no \"words\" - the player can only call it \"" + id + "\"");
       if (it.part && p.type === "side") warn(w + ": side quests shouldn't hold one of the 21 ship parts");

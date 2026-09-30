@@ -2,7 +2,7 @@
 (function (G) {
   var S = G.Starways = G.Starways || {};
 
-  S.VERSION = "0.1.0";
+  S.VERSION = "0.2.0";
   S.PARTS_TOTAL = 21;
   S.PIC_W = 160;   // picture is 160x100 "fat pixels", like C64 multicolour mode
   S.PIC_H = 100;
@@ -70,7 +70,9 @@
     knock: ["knock", "bang", "tap"],
     shout: ["shout", "yell", "scream", "call", "sing"],
     attack: ["attack", "hit", "kill", "fight", "punch", "kick", "stab"],
-    touch: ["touch", "stroke", "pet", "feel", "pat"]
+    touch: ["touch", "stroke", "pet", "feel", "pat"],
+    heal: ["heal", "cure", "treat", "revive", "inject", "jab", "medicate"],
+    scan: ["scan", "analyse", "analyze", "probe", "detect"]
   };
 
   // System commands (whole-line match, never cost a move)
@@ -94,7 +96,7 @@
   S.EFFECTS = ["say", "set", "clear", "inc", "give", "remove", "place", "show", "hide", "goto", "exit",
     "score", "die", "sound", "next", "return", "win", "command"];
   S.CONDITIONS = ["has", "here", "near", "in", "tag", "flag", "parts", "score", "visited", "gone"];
-  S.PIC_OPS = ["bg", "rect", "line", "poly", "circ", "oval", "ring", "dither", "stars", "plot", "grad"];
+  S.PIC_OPS = ["bg", "rect", "line", "poly", "circ", "oval", "ring", "dither", "stars", "plot", "grad", "sprite"];
   S.SOUNDS = ["beep", "good", "bad", "part", "die", "beacon", "win", "portal"];
 
   S.RANKS = [

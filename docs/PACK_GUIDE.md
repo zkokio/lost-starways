@@ -53,6 +53,7 @@ Start from [`pack-template.json`](pack-template.json) (a main land) or [`../comm
   "dark": false,
   "tags": ["water"],
   "hint": "EXAMINE the snowman.",
+  "scan": "Shown when the player SCANs this room with the electronic screwdriver.",
   "listen": "The wind howls.",
   "smell": "Cold. Just cold.",
   "onEnter": [ { "once": true, "do": [ { "say": "Brrr!" } ] } ],
@@ -80,6 +81,8 @@ Start from [`pack-template.json`](pack-template.json) (a main land) or [`../comm
   "fixed": "It's frozen to the ground.",   // can't be taken (custom message)
   "hidden": true,        // invisible until an action uses {"show": "icicle"}
   "npc": true,           // a character: TALK TO works and it accepts GIVE
+  "alien": true,         // speaks gibberish until the player switches on the audio translator
+  "scan": "Text shown when the player SCANs this item with the electronic screwdriver.",
   "talk": "\"Hello!\"",
   "refuse": "\"I don't want that.\"",
   "edible": true, "eat": "Crunchy.",
@@ -88,7 +91,9 @@ Start from [`pack-template.json`](pack-template.json) (a main land) or [`../comm
 }
 ```
 
-The starting kit belongs to the `core` pack, and you can use it in any land: `candle`, `matches`, `knife`, `flask`, `ration`. The flag `core:flask_full` is true when the flask has water in it, and the condition `lit` is true when the candle is burning.
+The starting kit belongs to the `core` pack, and you can use it in any land: `candle`, `matches`, `knife`, `flask`, `ration`, `translator` (audio translator), `medpen` (medical pen, 3 doses), plus `edriver` (electronic screwdriver, found in Grimmoor's pod).
+
+Useful core flags: `core:flask_full` (the flask has water), `core:translator_on`, `core:pen_used` (number of medical-pen doses used, so `!flag:core:pen_used>=3` means there's a dose left). The condition `lit` is true when the candle is burning. To use a dose in your own action, add `{"inc": "core:pen_used"}`.
 
 ## Actions (puzzles)
 
@@ -190,6 +195,7 @@ The screen is **160 × 100** pixels. The pixels are twice as wide as they are ta
 | `dither` | `["dither", c, x, y, w, h]` checkerboard (fog, texture, shading) |
 | `stars` | `["stars", c, seed, count, x, y, w, h]` |
 | `plot` | `["plot", c, x1, y1, x2, y2 ...]` single pixels |
+| `sprite` | `["sprite", x, y, 2, "..77..", ".7007.", ...]` pixel art: each character is one pixel (`0`-`9`, `a`-`f` = colour 0-15, `.` = see-through). The optional number is the scale (2 = double size). Great for characters. |
 
 Ops draw in order, so the background goes first. To draw only when a condition is true:
 ```json
@@ -198,7 +204,7 @@ Ops draw in order, so the background goes first. To draw only when a condition i
 
 ## Verb list
 
-`go look examine take drop use open close unlock light extinguish cut throw dig eat drink give type read push pull climb run hide talk listen wear fill tie wait put peer pour jump smell enter fix knock shout attack touch`
+`go look examine take drop use open close unlock light extinguish cut throw dig eat drink give type read push pull climb run hide talk listen wear fill tie wait put peer pour jump smell enter fix knock shout attack touch heal scan`
 
 Players can use synonyms, which all map to these verbs. For example `get`/`pick up` → `take`, `look through` → `peer`, `put out` → `extinguish`, `insert` → `put`, `x` → `examine`, and `enter 1234`/`login 1234` → `type`. The full list is in `js/defs.js`.
 

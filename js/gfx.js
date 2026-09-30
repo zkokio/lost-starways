@@ -99,6 +99,17 @@
           };
           for (i = 0; i < a[3]; i++) { var sx = bx + Math.floor(rnd() * bw); px(sx, by + Math.floor(rnd() * bh), c); }
           break;
+        case "sprite": // ["sprite", x, y, (scale,) "row", "row", ...]
+          var sc = typeof a[3] === "number" ? a[3] : 1, first = sc === a[3] ? 4 : 3;
+          for (y = first; y < a.length; y++) {
+            var row = String(a[y]);
+            for (x = 0; x < row.length; x++) {
+              var ch = parseInt(row.charAt(x), 16);
+              if (isNaN(ch)) continue;
+              for (var sy = 0; sy < sc; sy++) for (var sx2 = 0; sx2 < sc; sx2++) px(a[1] + x * sc + sx2, a[2] + (y - first) * sc + sy, ch);
+            }
+          }
+          break;
         case "plot":
           for (i = 2; i + 1 < a.length; i += 2) px(a[i], a[i + 1], c);
           break;

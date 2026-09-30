@@ -12,6 +12,8 @@ You strike a match and light the candle. A warm glow pushes back the dark.
 - Picture at the top and text at the bottom, using a 160×100 "fat pixel" picture and the C64 palette
 - Two-word parser (`TAKE STONE`, `GIVE FOOD TO HERMIT`, `TYPE 7304`) with 40+ verbs and synonyms
 - Inventory (`I` or `TAB`), a points score, ranks and hints (each hint costs 5 points)
+- Science kit: an **audio translator** (understand alien characters), a **medical pen** (heals people, 3 doses) and an **electronic screwdriver** (fixes robots, opens panels, SCANs for secrets)
+- Characters to talk to: Zib the injured alien scout, Mags the three-eyed crow, Burble the frog-creature, K-7 the observatory robot, and the hungry hermit
 - **Beacons** are checkpoints. They save your progress automatically, and if you die you go back to the last one (−20 points).
 - Sound effects made with the browser's built-in audio, a loading screen with border stripes, and optional CRT scanlines
 - **Community lands.** New maps and side quests are plain JSON files that anyone can write, paste into the game and share.

@@ -518,6 +518,15 @@
     }
     if (p.o1) st.last = p.o1;
 
+    // Aliens are gibberish until the audio translator is switched on
+    var target = p.verb === "talk" ? p.o1 : null;
+    if (target && this.idef(target) && this.idef(target).alien && !st.flags["core:translator_on"]) {
+      var syl = ["zor", "blee", "ka", "nix", "vrr", "ool", "thak", "mi", "gluu", "ek", "qua", "zz"], g = [];
+      for (var gi = 0; gi < 6; gi++) g.push(syl[(st.moves * 7 + gi * 5) % syl.length]);
+      this.say("\"" + g.slice(0, 3).join("-") + "! " + g.slice(3).join(" ") + "?\"");
+      return this.say(st.where["core:translator"] === "inv" ? "(You can't understand a word. Your audio translator is switched off.)" : "(You can't understand a word. If only you had a translator...)", "sys");
+    }
+
     if (this.runActions(this.pack().actions, pid, pid, p)) return;
     if (S.packs.core && this.runActions(S.packs.core.actions, "core", "core", p)) return;
 
@@ -597,6 +606,15 @@
       case "hide": return this.say("There's nowhere to hide here.");
       case "dig": return this.say(this.inv().some(function (k) { return /spade|shovel/.test(k); }) ? "You dig a hole. Nothing there. You fill it in again." : "You have nothing to dig with.");
       case "type": return this.say("There's nothing here to type on.");
+      case "scan":
+        var scanner = this.inv().filter(function (k) { var x = self.idef(k); return x && x.scanner; })[0];
+        if (!scanner) return this.say("You have nothing to scan with.");
+        this.sound("beep");
+        if (o && o !== scanner) return this.say("SCAN: " + (this.text(d.scan, o.split(":")[0]) || "Nothing unusual about the " + name + "."), "exits");
+        return this.say("SCAN: " + (this.text(r && r.scan) || "Nothing unusual detected."), "exits");
+      case "heal":
+        if (st.where["core:medpen"] !== "inv") return this.say("You have nothing to heal with.");
+        return this.say(o && d.npc ? "The " + name + " doesn't need healing." : "You're not hurt. Save the medical pen for someone who is.");
       case "run": return this.say("You run around in circles. Feel better?");
       case "climb": return this.say("There's nothing here to climb.");
       case "enter": return this.say("You can't enter that.");
