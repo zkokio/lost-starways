@@ -1,0 +1,76 @@
+Starways.addPack(
+{
+  "format": 1,
+  "id": "core",
+  "type": "core",
+  "title": "The Lost Starways",
+  "start": { "inv": ["candle", "matches", "knife", "flask", "ration"] },
+  "intro": [
+    "The year is 3087.",
+    "Your scout ship, the STARLING, was ripped apart in a wormhole storm. Its 21 vital parts were scattered across the Starways - a chain of strange lands linked by ancient portals.",
+    "Your escape pod spiralled down towards the first of them...",
+    "Find the 21 parts. Find your ship. Find your way HOME."
+  ],
+  "titlePic": [
+    ["bg", 0],
+    ["stars", 1, 7, 70], ["stars", 15, 3, 40], ["stars", 14, 11, 30],
+    ["oval", 6, 128, 82, 34, 30], ["oval", 14, 122, 76, 24, 20], ["oval", 3, 118, 72, 10, 8],
+    ["line", 7, 78, 92, 159, 66], ["line", 8, 80, 94, 159, 68],
+    ["poly", 15, 30, 30, 52, 26, 60, 30, 52, 34], ["poly", 12, 30, 30, 24, 26, 24, 34],
+    ["plot", 3, 50, 29, 52, 29],
+    ["poly", 8, 23, 28, 14, 30, 23, 32], ["plot", 7, 16, 30, 12, 30],
+    ["circ", 10, 20, 70, 4]
+  ],
+  "items": {
+    "candle": {
+      "name": [{ "if": "lit", "text": "candle (lit)" }, { "text": "candle" }],
+      "words": ["candle", "wax"],
+      "desc": [{ "if": "lit", "text": "A stubby candle, burning with a warm steady flame." }, { "text": "A stubby wax candle. You could LIGHT it." }]
+    },
+    "matches": {
+      "name": "box of matches",
+      "words": ["matches", "match", "box", "matchbox"],
+      "desc": "A battered box of STARLING safety matches. Plenty left."
+    },
+    "knife": {
+      "name": "pocket knife",
+      "words": ["knife", "pocket knife", "blade", "penknife"],
+      "desc": "Your trusty pocket knife. Sharp enough to cut wire, rope, or a very tough sandwich."
+    },
+    "flask": {
+      "name": [{ "if": "flag:flask_full", "text": "water flask (full)" }, { "text": "water flask (empty)" }],
+      "words": ["flask", "bottle", "canteen", "water flask"],
+      "desc": [{ "if": "flag:flask_full", "text": "A metal flask, full of water." }, { "text": "A metal flask. Empty. You could FILL it wherever there's water." }]
+    },
+    "ration": {
+      "name": "food ration",
+      "words": ["ration", "food", "food ration", "bar", "grub", "snack"],
+      "desc": "A foil-wrapped emergency food bar. Chicken-and-plum flavour. Nobody knows why."
+    }
+  },
+  "actions": [
+    { "verb": "light", "noun": "candle", "once": true, "if": ["!lit", "has:matches"],
+      "do": [{ "set": "lit" }, { "say": "You strike a match and light the candle. A warm glow pushes back the dark." }, { "score": 10 }, { "sound": "good" }, { "command": "look" }] },
+    { "verb": "light", "noun": "candle", "if": ["!lit", "has:matches"],
+      "do": [{ "set": "lit" }, { "say": "You strike a match and relight the candle." }, { "command": "look" }] },
+    { "verb": "light", "noun": "candle", "if": "lit", "do": [{ "say": "It's already lit." }] },
+    { "verb": "light", "noun": "candle", "do": [{ "say": "You have nothing to light it with." }] },
+    { "verb": "light", "noun": ["matches", ""], "do": [{ "say": "You strike a match. It flares and dies. Perhaps LIGHT CANDLE?" }] },
+
+    { "verb": "extinguish", "noun": "candle", "if": "lit", "do": [{ "clear": "lit" }, { "say": "You pinch out the candle." }, { "command": "look" }] },
+    { "verb": "extinguish", "noun": "candle", "do": [{ "say": "It isn't lit." }] },
+
+    { "verb": "fill", "noun": "flask", "if": "flag:flask_full", "do": [{ "say": "It's already full." }] },
+    { "verb": "fill", "noun": "flask", "if": "tag:water", "do": [{ "set": "flask_full" }, { "say": "You fill the flask with cold, clear water." }] },
+    { "verb": "fill", "noun": "flask", "do": [{ "say": "There's no water here." }] },
+    { "verb": "take", "noun": "water", "if": ["tag:water", "has:flask", "!flag:flask_full"], "do": [{ "set": "flask_full" }, { "say": "You fill the flask with cold, clear water." }] },
+
+    { "verb": "drink", "noun": ["flask", "water"], "if": "flag:flask_full", "do": [{ "clear": "flask_full" }, { "say": "You gulp down the water. Refreshing! The flask is empty now." }] },
+    { "verb": "drink", "noun": ["flask", "water"], "if": "tag:water", "do": [{ "say": "You scoop up a handful. Icy and delicious." }] },
+    { "verb": "drink", "noun": ["flask", "water"], "do": [{ "say": "Your flask is empty." }] },
+
+    { "verb": "eat", "noun": "ration", "do": [{ "say": "You're peckish, but something tells you to save it. Someone may need it more than you." }] },
+    { "verb": "cut", "noun": "", "do": [{ "say": "CUT WHAT?" }] }
+  ]
+}
+);

@@ -1,0 +1,52 @@
+{
+  "format": 1,
+  "id": "my-land",
+  "type": "main",
+  "order": 2,
+  "title": "My Land",
+  "author": "Your Name",
+  "colors": { "border": 5, "bg": 0, "text": 13 },
+  "intro": "One or two sentences shown when the player first arrives.",
+  "start": "arrival",
+  "rooms": {
+    "arrival": {
+      "name": "Arrival Point",
+      "beacon": true,
+      "desc": "Describe the room. Mention the exits in CAPITALS, like FORWARD.",
+      "exits": {
+        "forward": { "to": "gate", "if": "flag:gate_open", "no": "A locked gate blocks the way." }
+      },
+      "items": ["key", "gatething"],
+      "hint": [
+        { "if": "!has:key", "text": "TAKE the KEY." },
+        { "text": "UNLOCK the GATE." }
+      ],
+      "pic": [
+        ["grad", 6, 4, 0, 50],
+        ["rect", 5, 0, 60, 160, 40],
+        ["rect", 12, 70, 30, 20, 30]
+      ]
+    },
+    "gate": {
+      "name": "Beyond the Gate",
+      "desc": "You made it through! A portal hums UP above you.",
+      "exits": { "back": "arrival" },
+      "items": ["partx"],
+      "pic": [["bg", 0], ["stars", 1, 3, 40], ["oval", 6, 80, 40, 20, 25]]
+    }
+  },
+  "items": {
+    "key": { "name": "brass key", "words": ["key", "brass key"], "desc": "A small brass key.",
+      "pic": [["rect", 7, 40, 90, 6, 2]] },
+    "gatething": { "name": "gate", "words": ["gate"], "scenery": true, "desc": "An iron gate with a keyhole." },
+    "partx": { "name": "power crystal", "words": ["crystal", "power crystal"], "part": true, "desc": "One of the STARLING's parts!" }
+  },
+  "actions": [
+    { "verb": ["unlock", "open", "use"], "noun": ["gatething", "key"], "room": "arrival", "if": ["has:key", "!flag:gate_open"],
+      "do": [{ "say": "The key turns with a clunk and the gate swings open." }, { "set": "gate_open" }, { "score": 10 }],
+      "fail": "It's locked." },
+    { "verb": "go", "noun": "up", "room": "gate", "if": "parts:4",
+      "do": [{ "say": "You leap into the portal!" }, { "next": true }],
+      "fail": "The portal won't open until you've found this land's ship part." }
+  ]
+}

@@ -1,0 +1,137 @@
+/* THE LOST STARWAYS - C64 look */
+:root {
+  --border: #6c5eb5;   /* light blue */
+  --bg: #352879;       /* blue */
+  --fg: #6c5eb5;       /* light blue */
+  --white: #ffffff;
+  --yellow: #b8c76f;
+  --cyan: #70a4b2;
+  --green: #9ad284;
+  --red: #68372b;
+  --grey: #959595;
+  --key: #433900;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  padding: 16px;
+  background: var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: "Press Start 2P", "Courier New", monospace;
+  color: var(--fg);
+  transition: background .15s;
+}
+body.loading { animation: stripes .09s steps(1) infinite; }
+@keyframes stripes {
+  0%   { background: repeating-linear-gradient(0deg, #68372b 0 7px, #70a4b2 7px 13px, #b8c76f 13px 18px, #352879 18px 26px, #9a6759 26px 31px); }
+  50%  { background: repeating-linear-gradient(0deg, #6f3d86 0 5px, #588d43 5px 12px, #6c5eb5 12px 19px, #6f4f25 19px 24px, #ffffff 24px 26px); }
+}
+body.flash-die { background: #68372b !important; }
+body.flash-part { animation: rainbow .12s steps(1) 5; }
+@keyframes rainbow { 0% { background: #b8c76f; } 33% { background: #9ad284; } 66% { background: #70a4b2; } }
+
+#screen {
+  position: relative;
+  width: min(100%, 760px);
+  height: min(100%, 920px);
+  background: var(--bg);
+  padding: 14px;
+  display: flex; flex-direction: column;
+  font-size: clamp(8px, 1.85vw, 13px);
+  line-height: 1.6;
+  overflow: hidden;
+}
+#screen.crt::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,.18) 0 1px, transparent 1px 3px);
+}
+
+#status {
+  display: flex; justify-content: space-between; gap: 1em; flex-wrap: wrap;
+  background: var(--fg); color: var(--bg);
+  padding: 4px 6px; margin-bottom: 8px; text-transform: uppercase;
+}
+#pic {
+  display: block; width: 100%; aspect-ratio: 16 / 5; flex: none;
+  image-rendering: pixelated; image-rendering: crisp-edges;
+  background: #000;
+}
+#out {
+  flex: 1; min-height: 6em; overflow-y: auto; margin-top: 10px;
+  text-transform: uppercase; word-wrap: break-word;
+  scrollbar-width: thin; scrollbar-color: var(--fg) var(--bg);
+}
+.ln { white-space: pre-wrap; color: color-mix(in srgb, var(--fg) 45%, #ffffff); }
+.ln.head { color: var(--bg); background: var(--fg); display: inline-block; padding: 0 4px; margin-top: 4px; }
+.ln.items { color: var(--yellow); }
+.ln.exits { color: var(--cyan); }
+.ln.good { color: var(--green); }
+.ln.warn { color: var(--yellow); }
+.ln.sys { color: var(--grey); }
+.ln.echo { color: var(--white); margin-top: 6px; }
+.ln.die { color: var(--white); background: var(--red); }
+.ln.part { color: var(--bg); background: var(--yellow); animation: blink .5s steps(1) 6; }
+@keyframes blink { 50% { background: var(--white); } }
+
+#cmdline {
+  position: relative; display: flex; align-items: center; min-height: 2em;
+  color: var(--white); text-transform: uppercase; cursor: text;
+}
+.prompt { margin-right: .6em; color: var(--fg); }
+#typed { white-space: pre; overflow: hidden; }
+#cursor { color: var(--fg); animation: cur 1s steps(1) infinite; }
+@keyframes cur { 50% { opacity: 0; } }
+#cmd {
+  position: absolute; inset: 0; width: 100%; opacity: 0;
+  font: inherit; border: 0; background: transparent; color: transparent;
+}
+
+#keys { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+#keys button, .box button {
+  font: inherit; font-size: .85em; cursor: pointer;
+  background: var(--key); color: #ddd; border: 0;
+  border-bottom: 3px solid #1a1500; border-right: 3px solid #1a1500;
+  padding: 6px 8px; min-width: 2.6em;
+}
+#keys button:active, .box button:active { transform: translate(1px, 1px); border-width: 0 2px 2px 0; }
+#keys button:focus-visible, .box button:focus-visible { outline: 2px solid var(--white); }
+
+.overlay {
+  position: absolute; inset: 0; z-index: 5;
+  background: var(--bg); color: var(--fg);
+  display: flex; align-items: center; justify-content: center; padding: 14px;
+  text-transform: uppercase;
+}
+.overlay.hidden { display: none; }
+#boot { align-items: flex-start; justify-content: flex-start; white-space: pre-wrap; flex-direction: column; }
+.box {
+  width: min(100%, 520px); max-height: 100%; overflow-y: auto;
+  border: 4px solid var(--fg); padding: 14px;
+}
+.box.wide { width: min(100%, 700px); }
+.box-title { background: var(--fg); color: var(--bg); padding: 2px 6px; margin-bottom: 10px; }
+.box-title.small { margin-top: 12px; }
+.box ul { list-style: none; padding: 0; margin: 0 0 8px; }
+.box li { color: var(--white); }
+.box li::before { content: "* "; color: var(--fg); }
+.dim { color: var(--grey); margin-top: 10px; text-transform: none; }
+.dim a { color: var(--cyan); }
+#inv-slots { display: grid; grid-template-columns: repeat(7, minmax(0, 34px)); gap: 4px; margin-bottom: 8px; }
+#inv-slots span { aspect-ratio: 1; border: 2px solid var(--fg); }
+#inv-slots span.on { background: var(--yellow); border-color: var(--yellow); box-shadow: inset 0 0 0 3px var(--bg); }
+#modtext {
+  width: 100%; height: 14em; resize: vertical; margin-top: 8px;
+  font-family: "Courier New", monospace; font-size: 12px;
+  background: #000; color: var(--green); border: 2px solid var(--fg); padding: 6px;
+}
+.row { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+#modmsg { white-space: pre-wrap; font-family: "Courier New", monospace; font-size: 12px; color: var(--yellow); max-height: 10em; overflow-y: auto; text-transform: none; }
+#modlist li { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-bottom: 4px; }
+#modlist button { font-size: .75em; padding: 3px 6px; }
+
+@media (max-width: 520px) {
+  body { padding: 8px 16px; }
+  #screen { padding: 8px; font-size: 9px; }
+  #keys button { padding: 8px 6px; }
+}

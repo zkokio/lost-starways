@@ -1,0 +1,63 @@
+#!/usr/bin/env node
+// Plays through Grimmoor automatically and checks it can be completed. (SPOILERS!)
+// Usage: node tools/test.js [-v]
+const path = require("path");
+const { Starways: S, readPack, root } = require("./load");
+const verbose = process.argv.includes("-v");
+S.addPack(readPack(path.join(root, "packs/core.js")));
+S.addPack(readPack(path.join(root, "packs/grimmoor.js")));
+
+let log = [];
+const game = new S.Engine({ out: (t, c) => { log.push(t); if (verbose) console.log((c === "die" ? "!! " : "   ") + t); } });
+game.newGame();
+
+let failures = 0;
+function cmd(c, expect) {
+  log = [];
+  if (verbose) console.log("> " + c.toUpperCase());
+  game.command(c);
+  const out = log.join("\n");
+  if (expect && !new RegExp(expect, "i").test(out)) { failures++; console.log("✖ '" + c + "' expected /" + expect + "/ got:\n" + out); }
+}
+
+const solution = [
+  ["forward", "jammed"], ["light candle", "light the candle"], ["examine panel", "HATCH LOCK = RED"],
+  ["cut blue wire", "YOU HAVE DIED"],            // death -> back to pod beacon
+  ["light candle", "candle"], ["examine panel", "RED"],
+  ["cut red wire with knife", "swings open"], ["f", "Crash Crater"], ["take stone", "TAKEN"],
+  ["f", "Crossroads"], ["read sign", "HERMIT"], ["l", "Edge of the Bog"],
+  ["throw stone at bog", "safe path"], ["f", "Hermit"], ["forward", "blocks the door"],
+  ["talk to hermit", "grub"], ["give food to hermit", "SPADE"], ["f", "Inside the Hut"], ["take all", "TAKEN"],
+  ["b", "Hermit"], ["b", "Bog"], ["back", "Crossroads"], ["r", "Scarecrow"], ["get map", "TAKEN"], ["read map", "DEAD OAK"],
+  ["f", "Dead Oak"], ["dig", "FLUX COIL"], ["b", "Scarecrow"], ["l", "Crossroads"],
+  ["f", "Burning Bridge"], ["f", "toast"], ["fill flask", "fill the flask"], ["extinguish fire", "HISS"],
+  ["f", "Old Well"], ["d", "rope"], ["tie rope to well", "tie the rope"], ["climb down rope", "Bottom of the Well"],
+  ["take all", "NAV CHIP"], ["read note", "7 3 0 4"], ["u", "Old Well"], ["f", "Observatory Door"],
+  ["type 1234", "DENIED"], ["enter code 7304", "GRANTED"], ["f", "Observatory"], ["take screwdriver", "TAKEN"],
+  ["right", "fog"], ["look through telescope", "PORTAL"], ["r", "Standing Stones"], ["take tin", "TAKEN"],
+  ["open tin", "HULL RIVETS"], ["throw bone at hound", "clear"], ["f", "Portal Machine"],
+  ["put fuse in machine", "closed"], ["open panel", "FUSE socket"], ["insert fuse", "ROARS"],
+  ["i", "SHIP PARTS: 3/21"], ["up", "TO BE CONTINUED"]
+];
+solution.forEach(s => cmd(s[0], s[1]));
+
+// Extra parser checks
+game.newGame();
+const P = S.parse;
+[["pick up the stone", "take", "stone"], ["give hermit food", "give", "hermit food"], ["look through telescope", "peer", "telescope"],
+ ["climb down", "climb", "down"], ["jump into portal", "jump", "portal"], ["7304", "type", "7304"], ["put out fire", "extinguish", "fire"]]
+  .forEach(([t, v, n]) => { const p = P(t); if (p.verb !== v || p.n1 !== n) { failures++; console.log("✖ parse '" + t + "' -> " + JSON.stringify(p)); } });
+
+const st = game.state;
+console.log(failures ? "\n✖ " + failures + " problem(s)" : "✔ Grimmoor walkthrough OK");
+process.exitCode = failures ? 1 : 0;
+
+// Side quest: the example community pack hooks into the Scarecrow Field
+const fs = require("fs");
+S.addPack(readPack(path.join(root, "community/whispering-rift.json")), "community");
+game.newGame();
+game.state.room = "grimmoor:field"; game.state.pack = "grimmoor";
+[["look", "violet RIFT"], ["d", "Crystal Cave"], ["f", "Echo Chamber"], ["shout", "SHATTERS"], ["take gem", "25 POINTS"],
+ ["b", "Crystal Cave"], ["up", "Scarecrow Field"]].forEach(s => cmd(s[0], s[1]));
+console.log(failures ? "✖ side quest problems" : "✔ Side quest OK");
+process.exitCode = failures ? 1 : 0;

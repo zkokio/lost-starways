@@ -1,0 +1,72 @@
+{
+  "format": 1,
+  "id": "whispering-rift",
+  "type": "side",
+  "title": "The Whispering Rift",
+  "author": "Example Pack",
+  "colors": { "border": 4, "bg": 0, "text": 10 },
+  "hook": {
+    "pack": "grimmoor",
+    "room": "field",
+    "dir": "down",
+    "text": "A violet RIFT shimmers low among the wheat, leading DOWN."
+  },
+  "intro": "You slide down through the rift and land in a cave of singing crystal.",
+  "start": "cave",
+  "rooms": {
+    "cave": {
+      "name": "Crystal Cave",
+      "desc": "Violet crystals jut from every wall, humming softly. A tunnel leads FORWARD. The rift glimmers UP above you.",
+      "exits": { "forward": "chamber" },
+      "hint": "Go FORWARD to explore. Go UP to leave.",
+      "pic": [
+        ["bg", 0],
+        ["poly", 4, 0, 0, 30, 40, 0, 90], ["poly", 4, 159, 10, 130, 50, 159, 95],
+        ["poly", 10, 10, 20, 22, 40, 6, 50], ["poly", 10, 150, 30, 138, 52, 154, 60],
+        ["poly", 4, 40, 99, 60, 70, 80, 99], ["poly", 10, 100, 99, 115, 78, 130, 99],
+        ["oval", 4, 80, 10, 16, 6], ["ring", 10, 80, 10, 18, 8],
+        ["rect", 11, 60, 45, 40, 30], ["dither", 0, 60, 45, 40, 30]
+      ]
+    },
+    "chamber": {
+      "name": "Echo Chamber",
+      "desc": [
+        { "if": "flag:sang", "text": "The great crystal lies shattered. The echoes have fallen silent. The cave is BACK." },
+        { "text": "A vast round chamber. In the middle stands one enormous CRYSTAL, faintly glowing. Every footstep echoes a hundred times. The cave is BACK." }
+      ],
+      "exits": { "back": "cave" },
+      "items": ["crystal"],
+      "listen": "Your breathing echoes back at you... louder... LOUDER.",
+      "hint": [
+        { "if": "flag:sang", "text": "Take the gem and head home." },
+        { "text": "This place loves echoes. Make some noise! SHOUT." }
+      ],
+      "pic": [
+        ["bg", 0],
+        ["oval", 11, 80, 60, 78, 40], ["oval", 0, 80, 60, 70, 34],
+        ["rect", 4, 0, 85, 160, 15],
+        { "if": "!flag:sang", "ops": [["poly", 10, 72, 85, 80, 30, 88, 85], ["poly", 1, 78, 70, 80, 40, 82, 70]] },
+        { "if": "flag:sang", "ops": [["poly", 10, 60, 90, 66, 80, 72, 90], ["poly", 10, 88, 92, 95, 82, 100, 92], ["poly", 4, 76, 88, 80, 84, 84, 88]] }
+      ]
+    }
+  },
+  "items": {
+    "crystal": {
+      "name": "giant crystal", "words": ["crystal", "giant crystal"], "scenery": true,
+      "desc": [{ "if": "flag:sang", "text": "Shattered into a thousand pieces." }, { "text": "A towering violet crystal. It thrums when you speak near it." }]
+    },
+    "gem": {
+      "name": "star gem", "words": ["gem", "star gem", "jewel"], "points": 25,
+      "desc": "A tiny gem with a star trapped inside it. Worth a fortune somewhere."
+    }
+  },
+  "actions": [
+    { "verb": "shout", "room": "chamber", "if": "!flag:sang",
+      "do": [
+        { "say": "You bellow at the top of your lungs. The echoes build and build... the crystal shrieks... and SHATTERS! Something sparkles among the shards." },
+        { "set": "sang" }, { "place": ["gem", "chamber"] }, { "sound": "good" }, { "score": 15 }
+      ] },
+    { "verb": ["attack", "push", "touch"], "noun": "crystal", "if": "!flag:sang", "do": [{ "say": "It hums angrily but doesn't budge. Maybe try your voice instead." }] },
+    { "verb": "go", "noun": "up", "room": "cave", "do": [{ "say": "You climb up through the rift." }, { "return": true }] }
+  ]
+}

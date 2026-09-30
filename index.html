@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>The Lost Starways</title>
+  <meta name="description" content="An old-school C64-style text adventure across strange lands and alien worlds.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="loading">
+  <main id="screen" class="crt">
+    <div id="status" aria-live="off">
+      <span id="st-land">STARWAYS 64</span>
+      <span id="st-score">SC 0000</span>
+      <span id="st-parts">PARTS 00/21</span>
+      <span id="st-moves">MV 000</span>
+    </div>
+
+    <canvas id="pic" aria-label="Picture of the current location"></canvas>
+
+    <div id="out" role="log" aria-live="polite"></div>
+
+    <label id="cmdline" for="cmd">
+      <span class="prompt">&gt;</span><span id="typed"></span><span id="cursor">&#9608;</span>
+      <input id="cmd" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send" aria-label="Type a command">
+    </label>
+
+    <nav id="keys" aria-label="Quick commands">
+      <button data-cmd="forward">F</button><button data-cmd="back">B</button>
+      <button data-cmd="left">L</button><button data-cmd="right">R</button>
+      <button data-cmd="up">U</button><button data-cmd="down">D</button>
+      <button data-cmd="look" class="wide">LOOK</button>
+      <button data-cmd="i">I</button>
+      <button data-cmd="hint" class="wide">HINT</button>
+      <button data-cmd="mods" class="wide">MODS</button>
+      <button data-cmd="help">?</button>
+      <button data-cmd="sound" class="wide">SND</button>
+    </nav>
+
+    <!-- Boot screen -->
+    <div id="boot" class="overlay"></div>
+
+    <!-- Inventory -->
+    <div id="invpanel" class="overlay hidden" role="dialog" aria-label="Inventory">
+      <div class="box">
+        <div class="box-title">INVENTORY</div>
+        <ul id="inv-items"></ul>
+        <div class="box-title small">SHIP PARTS <span id="inv-count"></span></div>
+        <div id="inv-slots"></div>
+        <ul id="inv-parts"></ul>
+        <div class="dim">PRESS ANY KEY</div>
+      </div>
+    </div>
+
+    <!-- Community map packs -->
+    <div id="mods" class="overlay hidden" role="dialog" aria-label="Community lands">
+      <div class="box wide">
+        <div class="box-title">COMMUNITY LANDS</div>
+        <p class="dim">Paste a map pack (JSON) below. Packs are data only - they can't run code.
+          See <a href="docs/PACK_GUIDE.md" target="_blank" rel="noopener">docs/PACK_GUIDE.md</a>.</p>
+        <textarea id="modtext" spellcheck="false" placeholder='{ "format": 1, "id": "my-land", ... }'></textarea>
+        <div class="row">
+          <button id="mod-validate">VALIDATE</button>
+          <button id="mod-install">INSTALL</button>
+          <button id="mod-close">CLOSE</button>
+        </div>
+        <pre id="modmsg"></pre>
+        <div class="box-title small">INSTALLED</div>
+        <ul id="modlist"></ul>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/defs.js"></script>
+  <script src="js/parser.js"></script>
+  <script src="js/gfx.js"></script>
+  <script src="js/sound.js"></script>
+  <script src="js/validate.js"></script>
+  <script src="js/engine.js"></script>
+  <!-- Built-in lands. Add new main lands here (in any order - "order" in the pack decides). -->
+  <script src="packs/core.js"></script>
+  <script src="packs/grimmoor.js"></script>
+  <script src="js/ui.js"></script>
+</body>
+</html>
