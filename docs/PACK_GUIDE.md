@@ -52,6 +52,7 @@ Start from [`pack-template.json`](pack-template.json) (a main land) or [`../comm
   "beacon": true,
   "dark": false,
   "tags": ["water"],
+  "words": ["ice landing", "landing"],   // extra names for GO TO
   "hint": "EXAMINE the snowman.",
   "scan": "Shown when the player SCANs this room with the electronic screwdriver.",
   "listen": "The wind howls.",

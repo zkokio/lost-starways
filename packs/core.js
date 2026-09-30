@@ -99,7 +99,8 @@ Starways.addPack(
       "words": ["screwdriver", "electronic screwdriver", "driver", "edriver", "e driver", "scanner", "tool"],
       "scanner": true,
       "desc": "A buzzing electronic screwdriver. It undoes any screw, fixes circuits, and can SCAN places and things for hidden secrets.",
-      "pic": [["line", 12, 30, 90, 38, 90], ["line", 3, 39, 90, 42, 90], ["plot", 13, 43, 90]]
+      "pic": [["line", 12, 30, 90, 38, 90], ["line", 3, 39, 90, 42, 90], ["plot", 13, 43, 90]],
+      "hidden": true
     }
   },
   "actions": [

@@ -1548,7 +1548,7 @@ Starways.addPack(
         {"sound": "good"}
       ]
     },
-    {"verb": ["go", "run", "jump", "enter"], "noun": ["swamp"], "room": "bog", "do": [{"command": "go forward"}]},
+    {"verb": ["run", "jump", "enter"], "noun": ["swamp"], "room": "bog", "do": [{"command": "go forward"}]},
     {
       "verb": "give",
       "noun": "ration",

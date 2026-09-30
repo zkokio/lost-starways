@@ -2,7 +2,7 @@
 (function (G) {
   var S = G.Starways = G.Starways || {};
 
-  S.VERSION = "0.2.1";
+  S.VERSION = "0.2.2";
   S.PARTS_TOTAL = 21;
   S.PIC_W = 160;   // picture is 160x100 "fat pixels", like C64 multicolour mode
   S.PIC_H = 100;
@@ -30,7 +30,7 @@
 
   // Canonical verb -> words/phrases the player can type.
   S.VERBS = {
-    go: ["go", "walk", "move", "head", "travel", "step"],
+    go: ["go", "goto", "walk", "move", "head", "travel", "step", "visit", "approach", "return", "find", "follow"],
     look: ["look", "look around", "lk", "redescribe"],
     examine: ["examine", "x", "ex", "inspect", "search", "check", "look at", "study", "investigate"],
     take: ["take", "get", "pick up", "pick", "grab", "collect", "lift"],

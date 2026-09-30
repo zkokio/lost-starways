@@ -44,7 +44,7 @@
   var fixWords = verbWords.concat(Object.keys(dirWord), Object.keys(sysWord));
   // Common slips that the distance rule misses (too short, or too far off)
   S.MISSPELLINGS = { lok: "look", loook: "look", exmine: "examine", examin: "examine", tke: "take", tak: "take",
-    invetory: "inventory", inventry: "inventory", lit: "light", foward: "forward", fowards: "forward",
+    invetory: "inventory", inventry: "inventory", lit: "light", foward: "forward", fowards: "forward", got: "goto", gto: "goto",
     bak: "back", lft: "left", rite: "right", rigt: "right", dwn: "down", opn: "open", clim: "climb", thow: "throw",
     scredriver: "screwdriver", screwdiver: "screwdriver", screwdrvier: "screwdriver", transalator: "translator",
     translater: "translator", tranlator: "translator", keypd: "keypad", telescop: "telescope" };

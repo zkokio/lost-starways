@@ -72,3 +72,13 @@ game.newGame();
  ["inventroy", "TRANSLATOR"]].forEach(s => cmd(s[0], s[1]));
 console.log(failures ? "✖ typo problems" : "✔ Typo tolerance OK");
 process.exitCode = failures ? 1 : 0;
+
+// GO TO
+game.newGame();
+["light candle","examine panel","cut red wire","f","take stone","f","l","throw stone at bog"].forEach(c=>game.command(c));
+[["goto hermit", "HERMIT'S HUT"], ["go to crater", "make your way"], ["walk to the signpost", "Crossroads"], ["go to pod", "Escape Pod"],
+ ["go to observatory", "don't know"], ["go to hermit", "HERMIT'S HUT"], ["go to the bog", "Edge of the Bog"], ["go to bog", "right here"],
+ ["go to zib", "Crash Crater"]]
+ .forEach(s => cmd(s[0], s[1]));
+console.log(failures ? "✖ goto problems" : "✔ GO TO OK");
+process.exitCode = failures ? 1 : 0;

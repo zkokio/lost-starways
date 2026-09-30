@@ -275,6 +275,76 @@
     if (to) this.goRoom(this.rkey(to));
   };
 
+  // GO TO <place or thing>: walk to a room you know about (visited, or next door)
+  E.travel = function (phrase) {
+    var st = this.state, self = this, pid = st.pack, p = this.pack();
+    var words = phrase.split(" ").filter(function (w) { return S.STOPWORDS.indexOf(w) < 0 && S.PREPS.indexOf(w) < 0; });
+    if (!words.length) return this.say("Go where?");
+    var obj = phrase === "it" ? st.last : this.resolve(phrase);
+    if (obj && st.where[obj] === st.room) return this.say("It's right here.");
+    if (obj && st.where[obj] === "inv") return this.say("You're carrying it!");
+
+    function match(list) {           // 3 exact word, 2 fuzzy
+      var best = 0;
+      list.forEach(function (w) {
+        w = String(w).toLowerCase().replace(/[^a-z0-9 ]/g, "");
+        w.split(" ").concat([w]).forEach(function (x) {
+          if (!x) return;
+          words.forEach(function (y) {
+            if (x === y || x === y + "s" || x + "s" === y) best = Math.max(best, 3);
+            else if (S.fuzzy && S.fuzzy(y, [x])) best = Math.max(best, 2);
+          });
+        });
+      });
+      return best;
+    }
+    // Rooms reachable right now (respecting locked / deadly exits)
+    function next(rk) {
+      var saved = st.room, out = [];
+      st.room = rk;
+      S.DIR_ORDER.forEach(function (d) {
+        var e = self.exitOf(d);
+        if (!e || !e.to || e.to.charAt(0) === "@") return;
+        if (e.if && !self.check(e.if)) return;
+        out.push(self.rkey(e.to));
+      });
+      st.room = saved;
+      return out;
+    }
+    var near = next(st.room), best = null, bestScore = 0;
+    Object.keys(p.rooms || {}).forEach(function (rid) {
+      var rk = pid + ":" + rid, r = p.rooms[rid];
+      if (!st.visited[rk] && near.indexOf(rk) < 0) return;
+      var sc = match([self.text(r.name, pid), rid].concat(r.words || [])) * 2;
+      // things known to be there (characters, scenery, items)
+      Object.keys(st.where).forEach(function (k) {
+        if (st.where[k] !== rk || st.hidden[k]) return;
+        var d = self.idef(k);
+        if (d) sc = Math.max(sc, match(arr(d.words).concat([self.iname(k)])));
+      });
+      if (sc > bestScore) { best = rk; bestScore = sc; }
+    });
+    if (!best) return this.say("You don't know where that is yet.");
+    if (best === st.room) return this.say("You're already here.");
+    // Shortest path through rooms you've been to
+    var prev = {}, queue = [st.room], seen = {}; seen[st.room] = 1;
+    while (queue.length && !seen[best]) {
+      var cur = queue.shift();
+      next(cur).forEach(function (n) {
+        if (seen[n] || (!st.visited[n] && n !== best)) return;
+        seen[n] = 1; prev[n] = cur; queue.push(n);
+      });
+    }
+    if (!seen[best]) return this.say("You can't find a way there from here yet.");
+    var path = [], at = best;
+    while (at !== st.room) { path.unshift(at); at = prev[at]; }
+    if (path.length > 1) {
+      this.say("You make your way to the " + up(this.text(this.rdef(best).name, pid)).toLowerCase().replace(/^the /, "") + "...", "sys");
+      st.moves += path.length - 1;
+    }
+    this.goRoom(best);
+  };
+
   E.enterSide = function (pid) {
     this.state.returnTo = this.state.room;
     this.sound("portal");
@@ -541,7 +611,7 @@
     if (S.packs.core && this.runActions(S.packs.core.actions, "core", "core", p)) return;
 
     var dir = S.dirOf(p.n1);
-    if (p.verb === "go") return dir ? this.move(dir) : this.say(p.n1 ? "You can't go there." : "GO WHERE? (FORWARD, BACK, LEFT, RIGHT, UP, DOWN)");
+    if (p.verb === "go") return dir ? this.move(dir) : p.n1 ? this.travel(p.n1) : this.say("GO WHERE? (FORWARD, BACK, LEFT, RIGHT, UP, DOWN, or GO TO a place)");
     if (dir && ["climb", "run", "jump", "enter"].indexOf(p.verb) >= 0) return this.act({ verb: "go", n1: dir, n2: "", raw: p.raw });
     this.builtin(p);
   };
