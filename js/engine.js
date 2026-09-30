@@ -1,4 +1,4 @@
-/* THE LOST STARWAYS - game engine (no DOM; talks to the UI through `io`) */
+/* LOST STARWAYS - game engine (no DOM; talks to the UI through `io`) */
 (function (G) {
   var S = G.Starways;
   var SAVE_KEY = "starways.save.v1";

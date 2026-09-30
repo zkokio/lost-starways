@@ -1,4 +1,4 @@
-/* THE LOST STARWAYS - two-word (VERB NOUN [PREP NOUN]) parser */
+/* LOST STARWAYS - two-word (VERB NOUN [PREP NOUN]) parser */
 (function (G) {
   var S = G.Starways;
 

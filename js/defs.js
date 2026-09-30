@@ -1,4 +1,4 @@
-/* THE LOST STARWAYS - shared definitions (palette, verbs, directions) */
+/* LOST STARWAYS - shared definitions (palette, verbs, directions) */
 (function (G) {
   var S = G.Starways = G.Starways || {};
 

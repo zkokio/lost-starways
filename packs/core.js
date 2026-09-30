@@ -3,7 +3,7 @@ Starways.addPack(
   "format": 1,
   "id": "core",
   "type": "core",
-  "title": "The Lost Starways",
+  "title": "Lost Starways",
   "start": { "inv": ["candle", "matches", "knife", "flask", "ration"] },
   "intro": [
     "The year is 3087.",

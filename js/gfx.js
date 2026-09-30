@@ -1,4 +1,4 @@
-/* THE LOST STARWAYS - tiny palette-true pixel renderer (160x100 fat pixels) */
+/* LOST STARWAYS - tiny palette-true pixel renderer (160x100 fat pixels) */
 (function (G) {
   var S = G.Starways;
   var W = S.PIC_W, H = S.PIC_H;

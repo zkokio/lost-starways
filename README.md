@@ -1,4 +1,4 @@
-# THE LOST STARWAYS
+# LOST STARWAYS
 
 An old-school text adventure in the style of Commodore 64 games. Travel through strange lands and alien worlds, find the **21 lost parts** of your spaceship, and get home.
 

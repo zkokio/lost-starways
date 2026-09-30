@@ -1,4 +1,4 @@
-/* THE LOST STARWAYS - map pack validator (used in-game and by tools/validate.js) */
+/* LOST STARWAYS - map pack validator (used in-game and by tools/validate.js) */
 (function (G) {
   var S = G.Starways;
   var LIMITS = { rooms: 80, items: 200, actions: 500, text: 2000 };

@@ -1,4 +1,4 @@
-/* THE LOST STARWAYS - SID-ish beeps with WebAudio (no sound files) */
+/* LOST STARWAYS - SID-ish beeps with WebAudio (no sound files) */
 (function (G) {
   var S = G.Starways;
   var Snd = S.Sound = { on: true, ctx: null };

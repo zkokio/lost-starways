@@ -1,4 +1,4 @@
-/* THE LOST STARWAYS - browser UI: screen, input, boot, overlays, mods */
+/* LOST STARWAYS - browser UI: screen, input, boot, overlays, mods */
 (function () {
   var S = window.Starways;
   var PACKS_KEY = "starways.packs.v1";
@@ -155,7 +155,7 @@
     theme(null);
     clear();
     gfx.draw(S.packs.core.titlePic, null, true);
-    print("THE LOST STARWAYS", "head");
+    print("LOST STARWAYS", "head");
     print("A text adventure across seven strange worlds.", "room");
     print("");
     print("PRESS RETURN TO START A NEW GAME", "good");
