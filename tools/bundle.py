@@ -10,6 +10,8 @@ for name in ("vt323", "press-start-2p"):
     css = css.replace(f'url("../fonts/{name}.woff2")', f'url("data:font/woff2;base64,{b64}")')
 html = html.replace('<link rel="stylesheet" href="css/style.css">', "<style>\n" + css + "\n</style>")
 import json
+for m in set(re.findall(r'href="(icons/[^"]+\.png)"', html)):
+    html = html.replace('href="' + m + '"', 'href="data:image/png;base64,' + base64.b64encode(open(os.path.join(root, m), "rb").read()).decode() + '"')
 def inline(m):
     src = rd(m.group(1))
     if m.group(1).startswith("packs/"):          # map packs: compact the JSON
