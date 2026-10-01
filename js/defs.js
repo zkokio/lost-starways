@@ -2,7 +2,7 @@
 (function (G) {
   var S = G.Starways = G.Starways || {};
 
-  S.VERSION = "0.2.4";
+  S.VERSION = "0.3.0";
   S.PARTS_TOTAL = 21;
   S.PIC_W = 160;   // picture is 160x100 "fat pixels", like C64 multicolour mode
   S.PIC_H = 100;
@@ -36,6 +36,8 @@
     take: ["take", "get", "pick up", "pick", "grab", "collect", "lift"],
     drop: ["drop", "put down", "discard", "leave"],
     use: ["use", "operate", "activate", "turn on", "switch on", "power on", "power up", "switch", "turn", "start", "boot", "engage"],
+    dance: ["dance", "boogie", "jig", "twirl"],
+    magic: ["xyzzy", "plugh", "plover", "abracadabra", "shazam", "hocus", "open sesame"],
     deactivate: ["deactivate", "turn off", "switch off", "power off", "power down", "shut off", "shut down", "disengage"],
     open: ["open", "unscrew", "pry", "prise", "force"],
     close: ["close", "shut"],
@@ -95,7 +97,7 @@
     "over", "across", "towards", "toward", "against", "upon", "beneath", "underneath", "off", "for", "by", "down", "up"];
 
   S.EFFECTS = ["say", "set", "clear", "inc", "give", "remove", "place", "show", "hide", "goto", "exit",
-    "score", "die", "sound", "next", "return", "win", "command"];
+    "score", "die", "sound", "next", "return", "win", "command", "secret"];
   S.CONDITIONS = ["has", "here", "near", "in", "tag", "flag", "parts", "score", "visited", "gone"];
   S.PIC_OPS = ["bg", "rect", "line", "poly", "circ", "oval", "ring", "dither", "stars", "plot", "grad", "sprite"];
   S.SOUNDS = ["beep", "good", "bad", "part", "die", "beacon", "win", "portal"];

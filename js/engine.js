@@ -495,6 +495,16 @@
             if (v > 0) this.say("(+" + v + " POINTS)", "good");
             break;
           case "sound": this.sound(v); break;
+          case "secret":
+            k = pid + ":" + v;
+            st.secrets = st.secrets || [];
+            if (st.secrets.indexOf(k) < 0) {
+              st.secrets.push(k);
+              st.score += 15;
+              this.sound("part");
+              this.say("*** SECRET FOUND! (" + st.secrets.length + " so far) +15 ***", "part");
+            }
+            break;
           case "goto": this.goRoom(this.rkey(v, pid)); return;
           case "die": this.die(this.text(v, pid)); return;
           case "next": this.nextPack(); return;
@@ -699,6 +709,8 @@
       case "climb": return this.say("There's nothing here to climb.");
       case "enter": return this.say("You can't enter that.");
       case "knock": return this.say("Knock knock. Nobody's there.");
+      case "dance": return this.say("You do a little dance. Nobody is watching. Probably.");
+      case "magic": return this.say("Nothing happens.");
       case "fix": return this.say("You'll need the whole ship first!");
       case "open": case "close": case "unlock": return this.say("It doesn't seem to open.");
       case "light": return this.say("You can't light that.");
@@ -723,7 +735,7 @@
         return;
       case "score":
         return this.say("SCORE: " + st.score + "  RANK: " + this.rank() + "  PARTS: " + st.parts.length + "/" + S.PARTS_TOTAL +
-          "  MOVES: " + st.moves + "  DEATHS: " + st.deaths, "good");
+          "  SECRETS: " + (st.secrets || []).length + "  MOVES: " + st.moves + "  DEATHS: " + st.deaths, "good");
       case "hint":
         var r = this.rdef(), h = r && this.text(r.hint);
         if (!h) return this.say("No hints here. Try EXAMINE-ing everything!", "sys");

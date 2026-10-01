@@ -263,7 +263,14 @@ Starways.addPack(
         {"say": "You're peckish, but something tells you to save it. Someone may need it more than you."}
       ]
     },
-    {"verb": "cut", "noun": "", "do": [{"say": "CUT WHAT?"}]}
+    {"verb": "cut", "noun": "", "do": [{"say": "CUT WHAT?"}]},
+    {
+      "verb": "magic",
+      "do": [
+        {"say": "A hollow voice booms: \"WRONG GAME, OLD-TIMER.\" Somewhere, a dwarf throws an axe at nobody."},
+        {"secret": "xyzzy"}
+      ]
+    }
   ]
 }
 );

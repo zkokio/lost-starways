@@ -13,7 +13,8 @@ You strike a match and light the candle. A warm glow pushes back the dark.
 - Two-word parser (`TAKE STONE`, `GIVE FOOD TO HERMIT`, `TYPE 7304`) with 40+ verbs and synonyms, typo correction, and `GO TO <place or character>` to walk back to anywhere you've been
 - Inventory (`I` or `TAB`), a points score, ranks and hints (each hint costs 5 points)
 - Science kit: an **audio translator** (understand alien characters), a **medical pen** (heals people, 3 doses) and an **electronic screwdriver** (fixes robots, opens panels, SCANs for secrets)
-- Characters to talk to: Zib the injured alien scout, Mags the three-eyed crow, Burble the frog-creature, K-7 the observatory robot, and the hungry hermit
+- Characters to talk to: Zib the injured alien scout, Mags the three-eyed crow, Burble the frog-creature, K-7 the observatory robot, the hungry hermit, and a gnome with a secret
+- 24 locations in Grimmoor, including dead ends you'll regret (the Gloomwood!), hidden **secrets** (+15 each) and collectables you'll need on later worlds
 - **Beacons** are checkpoints. They save your progress automatically, and if you die you go back to the last one (−20 points).
 - Sound effects made with the browser's built-in audio, a loading screen with border stripes, and optional CRT scanlines
 - **Community lands.** New maps and side quests are plain JSON files that anyone can write, paste into the game and share.
@@ -72,7 +73,7 @@ Both also run automatically on GitHub for every push and pull request (`.github/
 ## Roadmap
 
 - [x] Engine, parser, beacons, score, inventory, mods panel
-- [x] Land 1: Grimmoor (3 parts)
+- [x] Land 1: Grimmoor (3 parts, 24 locations, 8 secrets)
 - [ ] Lands 2–7 (18 more parts) and the final land, where the ship is
 - [ ] Picture editor for pack authors (draw, then export `pic` JSON)
 - [ ] Share codes for saves and packs

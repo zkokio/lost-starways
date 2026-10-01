@@ -112,13 +112,13 @@ Starways.addPack(
       "desc": [
         {
           "if": "flag:zib_healed",
-          "text": "You stand in a smoking crater gouged into purple moorland. Your pod lies half-buried BEHIND you. ZIB, the little alien scout, sits on a rock, humming. A track leads FORWARD over the rise."
+          "text": "You stand in a smoking crater gouged into purple moorland. Your pod lies half-buried BEHIND you. ZIB, the little alien scout, sits on a rock, humming. A track leads FORWARD over the rise, and a dark wood looms to the LEFT."
         },
         {
-          "text": "You stand in a smoking crater gouged into purple moorland. Your pod lies half-buried BEHIND you. Slumped against a rock is a small green ALIEN, groaning in pain. A track leads FORWARD over the rise."
+          "text": "You stand in a smoking crater gouged into purple moorland. Your pod lies half-buried BEHIND you. Slumped against a rock is a small green ALIEN, groaning in pain. A track leads FORWARD over the rise, and a dark wood looms to the LEFT."
         }
       ],
-      "exits": {"back": "pod", "forward": "crossroads"},
+      "exits": {"back": "pod", "forward": "crossroads", "left": "woodedge"},
       "items": ["stone", "podshell", "zib"],
       "hint": [
         {
@@ -297,10 +297,10 @@ Starways.addPack(
       "desc": [
         {
           "if": "flag:hermit_fed",
-          "text": "The hermit sits happily beside his doorstep, crumbs in his beard. The hut door stands open AHEAD. The bog path leads BACK."
+          "text": "The hermit sits happily beside his doorstep, crumbs in his beard. The hut door stands open AHEAD. A little path winds RIGHT round the back. The bog path leads BACK."
         },
         {
-          "text": "A ramshackle hut of bones and turf. A gaunt HERMIT with a beard down to his knees blocks the doorway, clutching his rumbling stomach. The bog path leads BACK."
+          "text": "A ramshackle hut of bones and turf. A gaunt HERMIT with a beard down to his knees blocks the doorway, clutching his rumbling stomach. A little path winds RIGHT round the back. The bog path leads BACK."
         }
       ],
       "exits": {
@@ -309,7 +309,8 @@ Starways.addPack(
           "to": "hutin",
           "if": "flag:hermit_fed",
           "no": "The hermit blocks the door. \"Nobody gets in on an empty stomach! MY empty stomach, that is.\""
-        }
+        },
+        "right": "garden"
       },
       "items": ["hermit"],
       "hint": [
@@ -404,13 +405,13 @@ Starways.addPack(
       "desc": [
         {
           "if": "here:map",
-          "text": "A field of blue alien wheat whispers in the wind. A lopsided SCARECROW with three arms stands guard with a three-eyed CROW on its arm, a scrap of paper poking from its pocket. On a hill FORWARD looms a dead oak. The crossroads lies LEFT."
+          "text": "A field of blue alien wheat whispers in the wind. A lopsided SCARECROW with three arms stands guard with a three-eyed CROW on its arm, a scrap of paper poking from its pocket. On a hill FORWARD looms a dead oak. Off to the RIGHT the wheat has been flattened into strange shapes. The crossroads lies LEFT."
         },
         {
-          "text": "A field of blue alien wheat whispers in the wind. A lopsided SCARECROW with three arms stands guard with a three-eyed CROW on its arm. On a hill FORWARD looms a dead oak. The crossroads lies LEFT."
+          "text": "A field of blue alien wheat whispers in the wind. A lopsided SCARECROW with three arms stands guard with a three-eyed CROW on its arm. On a hill FORWARD looms a dead oak. Off to the RIGHT the wheat has been flattened into strange shapes. The crossroads lies LEFT."
         }
       ],
-      "exits": {"left": "crossroads", "back": "crossroads", "forward": "oak"},
+      "exits": {"left": "crossroads", "back": "crossroads", "forward": "oak", "right": "cropcircle"},
       "items": ["scarecrow", "map", "mags"],
       "hint": [
         {"if": "flag:map_read", "text": "The map points to the dead oak. You'll need something to dig with."},
@@ -507,10 +508,10 @@ Starways.addPack(
       "desc": [
         {
           "if": "flag:fire_out",
-          "text": "A babbling STREAM of silvery water. The charred footbridge, still steaming, leads FORWARD across it. A frog-like creature called BURBLE sits on a rock nearby. The crossroads is BACK."
+          "text": "A babbling STREAM of silvery water. The charred footbridge, still steaming, leads FORWARD across it. A frog-like creature called BURBLE sits on a rock nearby. Downstream to the RIGHT you can hear a waterfall. The crossroads is BACK."
         },
         {
-          "text": "A babbling STREAM of silvery water blocks the path. The only footbridge is ABLAZE with eerie green FLAMES! Beyond it you glimpse an old stone well. A frog-like creature called BURBLE sits on a rock nearby. The crossroads is BACK."
+          "text": "A babbling STREAM of silvery water blocks the path. The only footbridge is ABLAZE with eerie green FLAMES! Beyond it you glimpse an old stone well. A frog-like creature called BURBLE sits on a rock nearby. Downstream to the RIGHT you can hear a waterfall. The crossroads is BACK."
         }
       ],
       "exits": {
@@ -519,7 +520,8 @@ Starways.addPack(
           "to": "well",
           "if": "flag:fire_out",
           "no": "The flames roar higher as you approach. You'd be toast. Literally."
-        }
+        },
+        "right": "waterfall"
       },
       "items": ["bridge", "fire", "water", "burble"],
       "hint": [
@@ -582,16 +584,17 @@ Starways.addPack(
       "desc": [
         {
           "if": "flag:rope_tied",
-          "text": "An old stone WELL stands on the far bank, your rope tied to its rusty winch and dangling DOWN into darkness. A path leads FORWARD to a domed building. The bridge is BACK."
+          "text": "An old stone WELL stands on the far bank, your rope tied to its rusty winch and dangling DOWN into darkness. A path leads FORWARD to a domed building. Crooked gravestones poke out of the mist to the LEFT. The bridge is BACK."
         },
         {
-          "text": "An old stone WELL with a rusty winch stands on the far bank. Its shaft drops DOWN into total darkness - far too deep and slimy to climb unaided. A path leads FORWARD to a domed building. The bridge is BACK."
+          "text": "An old stone WELL with a rusty winch stands on the far bank. Its shaft drops DOWN into total darkness - far too deep and slimy to climb unaided. A path leads FORWARD to a domed building. Crooked gravestones poke out of the mist to the LEFT. The bridge is BACK."
         }
       ],
       "exits": {
         "back": "stream",
         "forward": "door",
-        "down": {"to": "wellbottom", "if": "flag:rope_tied", "no": "The shaft is sheer and slimy. You'd need a rope."}
+        "down": {"to": "wellbottom", "if": "flag:rope_tied", "no": "The shaft is sheer and slimy. You'd need a rope."},
+        "left": "graveyard"
       },
       "items": ["wellshaft", "tiedrope"],
       "hint": [
@@ -727,10 +730,10 @@ Starways.addPack(
       "desc": [
         {
           "if": "flag:scoped",
-          "text": "A circular chamber under a cracked glass dome. A great brass TELESCOPE points out through the roof. A workbench is cluttered with tools, a broken ROBOT slumps beside it, and a small BEACON glows by the door. The exit is BACK, and the hidden path to the standing stones leads RIGHT."
+          "text": "A circular chamber under a cracked glass dome. A great brass TELESCOPE points out through the roof. A workbench is cluttered with tools, a broken ROBOT slumps beside it, and a small BEACON glows by the door. An iron ladder leads UP to the roof. The exit is BACK, and the hidden path to the standing stones leads RIGHT."
         },
         {
-          "text": "A circular chamber under a cracked glass dome. A great brass TELESCOPE points out through a slot in the roof. A workbench is cluttered with tools, a broken ROBOT slumps beside it, and a small BEACON glows by the door. The exit is BACK."
+          "text": "A circular chamber under a cracked glass dome. A great brass TELESCOPE points out through a slot in the roof. A workbench is cluttered with tools, a broken ROBOT slumps beside it, and a small BEACON glows by the door. An iron ladder leads UP to the roof. The exit is BACK."
         }
       ],
       "exits": {
@@ -740,7 +743,8 @@ Starways.addPack(
           "if": "flag:scoped",
           "hidden": true,
           "no": "There's just fog out there. You'd get hopelessly lost."
-        }
+        },
+        "up": "balcony"
       },
       "items": ["telescope", "bench", "k7"],
       "hint": [
@@ -910,6 +914,372 @@ Starways.addPack(
         ["line", 15, 41, 24, 41, 83]
       ],
       "scan": "Power cell intact. Fuse socket EMPTY. Access panel held by 4 micro-screws."
+    },
+    "woodedge": {
+      "name": "Edge of the Gloomwood",
+      "desc": "The moor ends at a wall of black, twisted trees. A rotting SIGN is nailed to the nearest trunk. Somewhere inside, something giggles. The wood lies FORWARD. The crater is RIGHT.",
+      "exits": {"right": "crater", "back": "crater", "forward": "gloomwood"},
+      "items": ["warnsign"],
+      "listen": "Twigs snap. Something is breathing in there. Something big. Or lots of somethings small.",
+      "hint": "Some places are best left alone... but brave explorers may find something useful in there. Just don't go too deep.",
+      "pic": [
+        ["grad", 0, 4, 0, 44],
+        ["stars", 1, 91, 14, 0, 0, 160, 24],
+        ["circ", 15, 142, 8, 4],
+        ["rect", 4, 0, 70, 160, 30],
+        ["dither", 11, 0, 70, 160, 30],
+        [
+          "poly",
+          0,
+          0,
+          76,
+          0,
+          30,
+          10,
+          22,
+          18,
+          32,
+          26,
+          18,
+          36,
+          30,
+          46,
+          16,
+          56,
+          28,
+          64,
+          20,
+          74,
+          30,
+          84,
+          14,
+          96,
+          28,
+          106,
+          18,
+          116,
+          30,
+          126,
+          20,
+          136,
+          28,
+          146,
+          16,
+          159,
+          26,
+          159,
+          76
+        ],
+        ["rect", 11, 14, 40, 4, 36],
+        ["rect", 11, 52, 34, 5, 42],
+        ["rect", 11, 100, 38, 4, 38],
+        ["rect", 11, 138, 36, 5, 40],
+        ["line", 12, 15, 40, 15, 75],
+        ["line", 12, 53, 34, 53, 75],
+        ["line", 0, 18, 50, 30, 44],
+        ["line", 0, 104, 50, 116, 42],
+        ["line", 0, 57, 46, 66, 40],
+        ["plot", 7, 80, 50, 83, 50],
+        ["plot", 2, 120, 58, 122, 58],
+        ["plot", 13, 30, 62, 32, 62],
+        ["rect", 9, 40, 52, 2, 22],
+        ["rect", 8, 31, 46, 20, 9],
+        ["line", 0, 33, 49, 48, 49],
+        ["line", 0, 33, 52, 45, 52],
+        ["dither", 12, 0, 72, 160, 4],
+        ["dither", 15, 0, 74, 160, 1]
+      ]
+    },
+    "gloomwood": {
+      "name": "The Gloomwood",
+      "desc": "Trees crowd close, their branches knotted overhead like fingers. Pale fungus glows on the trunks. One ancient tree has something CARVED into its bark. The path twists FORWARD, deeper into the dark, or BACK to the moor.",
+      "exits": {"back": "woodedge", "forward": "woodheart"},
+      "items": ["carving", "fungus"],
+      "listen": "Whispering. Definitely whispering. You catch the words 'fresh' and 'crunchy'.",
+      "hint": "READ the CARVING. Deeper in, there's something worth taking - but it gets dark, so keep your candle lit.",
+      "pic": [
+        ["bg", 0],
+        ["dither", 11, 0, 0, 160, 30],
+        ["rect", 11, 0, 0, 14, 100],
+        ["rect", 12, 2, 0, 3, 100],
+        ["rect", 11, 140, 0, 20, 100],
+        ["rect", 12, 143, 0, 3, 100],
+        ["rect", 9, 26, 0, 8, 90],
+        ["rect", 9, 120, 0, 10, 88],
+        ["line", 8, 27, 0, 27, 89],
+        ["rect", 9, 64, 0, 32, 92],
+        ["dither", 8, 64, 0, 32, 92],
+        ["line", 8, 66, 0, 66, 92],
+        ["line", 15, 72, 40, 75, 35, 79, 40, 83, 35, 86, 40, 79, 50, 72, 40],
+        ["line", 15, 74, 56, 78, 56],
+        ["line", 15, 80, 56, 84, 56],
+        ["line", 15, 76, 60, 82, 60],
+        ["line", 0, 14, 20, 40, 30, 64, 22],
+        ["line", 0, 96, 18, 120, 26, 140, 14],
+        ["line", 0, 30, 40, 10, 46],
+        ["plot", 13, 28, 30, 28, 50, 122, 40, 124, 60, 3, 6, 60, 146, 30, 99, 70],
+        ["poly", 11, 56, 99, 104, 99, 90, 80, 70, 80],
+        ["dither", 0, 56, 82, 48, 17],
+        ["line", 15, 140, 4, 150, 14],
+        ["line", 15, 150, 4, 140, 14],
+        ["line", 15, 145, 2, 145, 16],
+        ["ring", 15, 145, 9, 4, 4]
+      ]
+    },
+    "woodheart": {
+      "name": "Heart of the Wood",
+      "dark": true,
+      "desc": "The trees grow so thick that no light gets in. Webs as thick as ropes hang everywhere. Something glints among the roots - an old LANTERN. From FORWARD comes a slow clicking sound. Very close. You could still go BACK.",
+      "exits": {
+        "back": "gloomwood",
+        "forward": {
+          "to": "woodheart",
+          "if": "flag:never",
+          "die": "You push forward through the webs. The clicking stops. Something with far too many legs drops onto your head. That's the end of that."
+        }
+      },
+      "items": ["lantern", "webs"],
+      "listen": "Click. Click. Click-click-click. It's getting closer.",
+      "scan": "WARNING: Large arachnid lifeform 4 metres ahead. Do NOT proceed.",
+      "hint": "Take the LANTERN and get OUT. Whatever you do, don't go FORWARD.",
+      "pic": [
+        ["bg", 0],
+        ["line", 15, 0, 0, 40, 30],
+        ["line", 15, 0, 20, 40, 30],
+        ["line", 15, 20, 0, 40, 30],
+        ["line", 12, 0, 40, 40, 30],
+        ["ring", 12, 40, 30, 10, 6],
+        ["line", 15, 159, 0, 120, 26],
+        ["line", 15, 159, 24, 120, 26],
+        ["line", 15, 138, 0, 120, 26],
+        ["line", 12, 159, 46, 120, 26],
+        ["ring", 12, 120, 26, 10, 6],
+        ["line", 12, 60, 0, 70, 20, 90, 20, 100, 0],
+        ["line", 12, 70, 20, 72, 40],
+        ["line", 12, 90, 20, 88, 40],
+        ["line", 11, 72, 40, 62, 34],
+        ["line", 11, 72, 40, 60, 44],
+        ["line", 11, 88, 40, 98, 34],
+        ["line", 11, 88, 40, 100, 44],
+        ["oval", 11, 80, 40, 8, 5],
+        ["plot", 2, 76, 38, 78, 38, 82, 38, 84, 38, 77, 40, 83, 40, 79, 42, 81, 42],
+        ["line", 9, 0, 90, 40, 84, 70, 96],
+        ["line", 9, 159, 92, 110, 86, 90, 98],
+        ["rect", 9, 0, 94, 160, 6]
+      ]
+    },
+    "garden": {
+      "name": "Hermit's Herb Garden",
+      "desc": "Behind the hut the hermit grows strange plants in neat rows: purple cabbages, humming turnips and a patch of GLOWING MUSHROOMS. A cheerful stone GNOME guards the path. The hut is LEFT.",
+      "exits": {"left": "hut", "back": "hut"},
+      "items": ["gnome", "veg", "mushroom"],
+      "listen": "The turnips are humming a tune you almost recognise.",
+      "hint": "Say hello to the GNOME. The mushrooms might come in handy one day.",
+      "pic": [
+        ["grad", 6, 4, 0, 52],
+        ["stars", 1, 15, 18, 40, 0, 120, 30],
+        ["circ", 7, 140, 10, 5],
+        ["rect", 8, 0, 24, 30, 56],
+        ["dither", 9, 0, 24, 30, 56],
+        ["poly", 9, 0, 20, 34, 26, 0, 32],
+        ["rect", 4, 30, 52, 130, 28],
+        ["dither", 11, 30, 52, 130, 28],
+        ["line", 9, 30, 50, 159, 50],
+        ["line", 9, 30, 46, 159, 46],
+        ["plot", 9, 40, 44, 60, 44, 80, 44, 100, 44, 120, 44, 140, 44],
+        ["rect", 9, 0, 76, 160, 24],
+        ["dither", 8, 0, 76, 160, 24],
+        ["oval", 4, 44, 80, 5, 3],
+        ["oval", 10, 43, 79, 2, 1],
+        ["oval", 4, 60, 82, 5, 3],
+        ["oval", 10, 59, 81, 2, 1],
+        ["oval", 4, 76, 80, 5, 3],
+        ["oval", 10, 75, 79, 2, 1],
+        ["oval", 1, 44, 92, 3, 2],
+        ["line", 5, 44, 89, 42, 86],
+        ["line", 5, 44, 89, 46, 86],
+        ["oval", 1, 60, 93, 3, 2],
+        ["line", 5, 60, 90, 58, 87],
+        ["line", 5, 60, 90, 62, 87],
+        ["oval", 1, 76, 92, 3, 2],
+        ["line", 5, 76, 89, 74, 86],
+        ["line", 5, 76, 89, 78, 86],
+        ["oval", 3, 134, 90, 4, 2],
+        ["oval", 14, 142, 92, 3, 2],
+        ["oval", 3, 148, 88, 3, 2],
+        ["rect", 15, 133, 91, 2, 4],
+        ["rect", 15, 147, 89, 2, 4],
+        ["dither", 3, 126, 82, 30, 12]
+      ]
+    },
+    "cropcircle": {
+      "name": "Crop Circle",
+      "desc": "In the far corner of the field the blue wheat has been flattened into a huge, perfect pattern of circles and spirals. In the very CENTRE lies a lump of strange metal with an old horseshoe MAGNET stuck to it. The field is LEFT.",
+      "exits": {"left": "field", "back": "field"},
+      "items": ["pattern", "magnet"],
+      "listen": "A faint electronic hum comes from the sky. Then a distant 'moo'.",
+      "scan": "Residual tractor-beam energy detected. Something landed here... or took off.",
+      "hint": "Stand in the middle and... well, what would YOU do in a crop circle? (Try DANCE or WAIT.)",
+      "pic": [
+        ["grad", 0, 6, 0, 38],
+        ["stars", 1, 23, 30, 0, 0, 160, 34],
+        ["circ", 15, 20, 10, 4],
+        ["rect", 14, 0, 36, 160, 64],
+        ["dither", 6, 0, 36, 160, 64],
+        ["dither", 3, 0, 36, 160, 2],
+        ["oval", 15, 80, 70, 62, 20],
+        ["oval", 14, 80, 70, 54, 17],
+        ["oval", 15, 80, 70, 42, 13],
+        ["oval", 14, 80, 70, 32, 10],
+        ["oval", 15, 80, 70, 20, 6],
+        ["oval", 14, 80, 70, 10, 3],
+        ["ring", 15, 28, 52, 12, 3],
+        ["ring", 15, 134, 90, 14, 5],
+        ["line", 15, 40, 52, 48, 60],
+        ["line", 15, 120, 88, 112, 80],
+        ["oval", 11, 80, 70, 4, 2],
+        ["plot", 7, 130, 6]
+      ]
+    },
+    "waterfall": {
+      "name": "Silver Falls",
+      "tags": ["water"],
+      "desc": "The stream tumbles over a rocky ledge in a curtain of silver spray. Rainbows shimmer in the mist. Behind the falling water you can just make out a dark opening - you could step FORWARD through the falls. The bridge is BACK.",
+      "exits": {"back": "stream", "left": "stream", "forward": "cave"},
+      "items": ["falls"],
+      "listen": "A roaring rush of water. Under it, very faintly... is that singing?",
+      "hint": "Step FORWARD through the falls. You might get wet.",
+      "pic": [
+        ["grad", 6, 4, 0, 30],
+        ["stars", 1, 3, 8, 0, 0, 160, 20],
+        ["poly", 12, 0, 10, 58, 12, 62, 74, 0, 80],
+        ["poly", 12, 159, 8, 102, 12, 98, 74, 159, 80],
+        ["dither", 11, 0, 10, 60, 70],
+        ["dither", 11, 100, 10, 60, 70],
+        ["line", 15, 58, 12, 62, 74],
+        ["line", 15, 102, 12, 98, 74],
+        ["oval", 0, 80, 46, 12, 16],
+        ["rect", 14, 60, 8, 40, 66],
+        ["dither", 1, 60, 8, 40, 66],
+        ["dither", 6, 62, 30, 36, 30],
+        ["line", 3, 66, 8, 66, 72],
+        ["line", 1, 74, 8, 74, 74],
+        ["line", 3, 86, 8, 86, 72],
+        ["line", 1, 94, 8, 94, 74],
+        ["oval", 6, 80, 84, 70, 12],
+        ["dither", 14, 10, 76, 140, 16],
+        ["dither", 15, 40, 70, 80, 8],
+        ["plot", 2, 44, 64, 46, 62, 7, 48, 60, 5, 50, 58, 6, 52, 56]
+      ]
+    },
+    "cave": {
+      "name": "Cave Behind the Falls",
+      "desc": "A damp little cave, lit by thousands of tiny GLOW-WORMS on the ceiling. The roar of the waterfall is muffled here. Something shiny sits in a niche in the rock. The only way out is BACK through the falls.",
+      "exits": {"back": "waterfall"},
+      "items": ["glowworms", "coin"],
+      "listen": "Drip... drip... and the glow-worms, very quietly, singing in harmony.",
+      "hint": "Take what's in the niche. Caves are good for echoes, too...",
+      "pic": [
+        ["bg", 0],
+        ["stars", 13, 7, 60, 10, 0, 140, 30],
+        ["stars", 3, 8, 40, 20, 0, 120, 24],
+        ["stars", 1, 9, 12, 30, 0, 100, 20],
+        ["poly", 11, 0, 0, 30, 20, 24, 70, 0, 99],
+        ["poly", 11, 159, 0, 130, 24, 136, 70, 159, 99],
+        ["dither", 12, 0, 0, 26, 99],
+        ["dither", 12, 134, 0, 26, 99],
+        ["rect", 14, 0, 30, 8, 50],
+        ["dither", 1, 0, 30, 8, 50],
+        ["rect", 9, 0, 82, 160, 18],
+        ["dither", 11, 0, 82, 160, 18],
+        ["plot", 14, 40, 88, 90, 92, 120, 86],
+        ["oval", 11, 112, 52, 10, 7],
+        ["oval", 0, 112, 53, 7, 4]
+      ]
+    },
+    "graveyard": {
+      "name": "Forgotten Graveyard",
+      "desc": "Crooked GRAVESTONES lean in the long grass around a tiny ruined chapel. Cold mist hugs the ground. One gravestone looks newer than the rest. Iron gates to a CRYPT stand FORWARD, chained shut. The well is RIGHT.",
+      "exits": {
+        "right": "well",
+        "back": "well",
+        "forward": {
+          "to": "graveyard",
+          "if": "flag:never",
+          "no": "The chains are rusted solid, and the padlock is the size of your head. Whatever is in that crypt can stay in there. For now."
+        }
+      },
+      "items": ["graves", "crypt", "key"],
+      "listen": "A faint voice whispers your name. Probably the wind. Probably.",
+      "scan": "Crypt: unusual energy signature behind the gates. Lock mechanism: alien design. Not openable on this world.",
+      "hint": "READ the newest GRAVESTONE. And take the KEY - it doesn't fit here, but you never know.",
+      "pic": [
+        ["grad", 0, 4, 0, 70],
+        ["stars", 1, 27, 30, 0, 0, 160, 50],
+        ["circ", 15, 132, 16, 10],
+        ["circ", 12, 135, 14, 4],
+        ["poly", 11, 6, 74, 6, 40, 22, 26, 38, 40, 38, 74],
+        ["rect", 0, 18, 48, 8, 12],
+        ["oval", 0, 22, 48, 4, 3],
+        ["line", 12, 22, 26, 22, 16],
+        ["line", 12, 19, 19, 25, 19],
+        ["rect", 4, 0, 72, 160, 28],
+        ["dither", 11, 0, 72, 160, 28],
+        ["rect", 11, 104, 40, 46, 36],
+        ["poly", 11, 100, 40, 127, 26, 154, 40],
+        ["rect", 0, 114, 48, 26, 28],
+        ["line", 12, 118, 48, 118, 75],
+        ["line", 12, 124, 48, 124, 75],
+        ["line", 12, 130, 48, 130, 75],
+        ["line", 12, 136, 48, 136, 75],
+        ["line", 7, 114, 60, 140, 62],
+        ["rect", 7, 124, 58, 5, 6],
+        ["rect", 12, 46, 62, 8, 14],
+        ["oval", 12, 50, 62, 4, 3],
+        ["line", 11, 47, 66, 52, 66],
+        ["poly", 12, 86, 64, 94, 62, 96, 76, 88, 78],
+        ["line", 11, 88, 68, 93, 67],
+        ["rect", 15, 64, 56, 12, 20],
+        ["oval", 15, 70, 56, 6, 4],
+        ["line", 11, 66, 62, 74, 62],
+        ["line", 11, 66, 66, 73, 66],
+        ["line", 11, 66, 70, 72, 70],
+        ["dither", 15, 0, 76, 160, 6],
+        ["dither", 12, 0, 84, 160, 2]
+      ]
+    },
+    "balcony": {
+      "name": "Observatory Balcony",
+      "desc": "A narrow iron balcony circles the dome. All of Grimmoor spreads out below you: the bog, the black wood, the glinting stream. The night SKY is enormous. A crumpled STAR CHART is caught on the railing. A ladder leads back DOWN.",
+      "exits": {"down": "observatory"},
+      "items": ["sky", "railing", "starchart"],
+      "listen": "Wind. And from far, far above... a faint, rhythmic beeping?",
+      "hint": "Take the STAR CHART. Then have a good LOOK at the SKY.",
+      "pic": [
+        ["grad", 0, 6, 0, 58],
+        ["stars", 1, 61, 60, 0, 0, 160, 56],
+        ["stars", 15, 62, 30, 0, 0, 160, 56],
+        ["stars", 14, 63, 15, 0, 0, 160, 56],
+        ["plot", 7, 100, 12],
+        ["plot", 1, 101, 12],
+        ["rect", 4, 0, 58, 160, 42],
+        ["dither", 11, 0, 58, 160, 42],
+        ["oval", 5, 30, 72, 22, 5],
+        ["dither", 9, 10, 68, 40, 8],
+        ["poly", 0, 0, 60, 20, 58, 40, 62, 40, 66, 0, 66],
+        ["line", 14, 46, 62, 70, 66, 100, 64, 130, 70, 159, 68],
+        ["oval", 15, 140, 62, 5, 3],
+        ["plot", 7, 120, 61],
+        ["oval", 15, 80, 118, 96, 34],
+        ["dither", 12, 0, 90, 160, 10],
+        ["line", 12, 0, 84, 159, 84],
+        ["line", 12, 0, 90, 159, 90],
+        ["line", 11, 0, 85, 159, 85],
+        ["line", 12, 20, 84, 20, 96],
+        ["line", 12, 60, 84, 60, 96],
+        ["line", 12, 100, 84, 100, 96],
+        ["line", 12, 140, 84, 140, 96]
+      ]
     }
   },
   "items": {
@@ -1427,9 +1797,324 @@ Starways.addPack(
         {"if": "!flag:k7_fixed", "ops": [["plot", 7, 19, 58, 42, 54, 1, 40, 50, 18, 62]]},
         {"if": "flag:k7_fixed", "ops": [["rect", 13, 28, 56, 4, 2]]}
       ]
+    },
+    "warnsign": {
+      "name": "sign",
+      "words": ["sign", "notice", "board"],
+      "scenery": true,
+      "desc": "A rotting wooden sign with painted letters.",
+      "read": "TURN BACK. NOBODY WHO GOES IN COMES OUT THE SAME. - THE MANAGEMENT"
+    },
+    "carving": {
+      "name": "carving",
+      "words": ["carving", "carved", "letters", "bark", "tree", "ancient tree", "heart"],
+      "scenery": true,
+      "desc": "Letters carved deep into the bark. Try READing them."
+    },
+    "fungus": {
+      "name": "fungus",
+      "words": ["fungus", "fungi", "glow"],
+      "scenery": true,
+      "desc": "Pale fungus that glows a sickly green. Best not to lick it."
+    },
+    "webs": {
+      "name": "webs",
+      "words": ["webs", "web", "cobwebs"],
+      "scenery": true,
+      "desc": "Webs as thick as ropes. Whatever spun them is enormous."
+    },
+    "lantern": {
+      "name": "old lantern",
+      "words": ["lantern", "old lantern", "lamp"],
+      "points": 5,
+      "desc": "An old brass lantern, cold and empty. Not much use on Grimmoor, but it might come in handy somewhere else on the Starways.",
+      "pic": [
+        ["rect", 8, 74, 84, 7, 9],
+        ["rect", 7, 75, 86, 5, 5],
+        ["line", 12, 74, 83, 80, 83],
+        ["ring", 12, 77, 81, 2, 2]
+      ]
+    },
+    "gnome": {
+      "name": "gnome",
+      "words": ["gnome", "statue", "garden gnome"],
+      "npc": true,
+      "scenery": true,
+      "desc": "A stone garden gnome with a red hat and a suspiciously knowing smile.",
+      "talk": "The gnome's stone mouth creaks open: \"Hello, sailor!\" Then it freezes again, as if nothing happened.",
+      "refuse": "The gnome stares through you.",
+      "pic": [
+        [
+          "sprite",
+          104,
+          52,
+          2,
+          "...2...",
+          "..222..",
+          ".22222.",
+          "2222222",
+          ".aaaaa.",
+          ".a0a0a.",
+          ".11111.",
+          "6111116",
+          "6611166",
+          ".66666.",
+          ".66.66.",
+          ".99.99."
+        ]
+      ]
+    },
+    "veg": {
+      "name": "vegetables",
+      "words": ["cabbages", "cabbage", "turnips", "turnip", "plants", "vegetables", "veg", "rows"],
+      "scenery": true,
+      "desc": "Purple cabbages and fat white turnips. The turnips are humming."
+    },
+    "mushroom": {
+      "name": "glowing mushroom",
+      "words": ["mushroom", "mushrooms", "glowing mushroom", "toadstool"],
+      "points": 5,
+      "desc": "A mushroom that glows soft blue. The hermit won't miss one. Probably. It might light the way somewhere darker than Grimmoor.",
+      "pic": [["oval", 3, 140, 85, 4, 2], ["rect", 15, 139, 86, 2, 4], ["plot", 1, 139, 84]]
+    },
+    "pattern": {
+      "name": "crop circle",
+      "words": ["circle", "circles", "pattern", "spirals", "wheat", "centre", "center", "middle", "metal", "lump"],
+      "scenery": true,
+      "desc": "Perfect circles inside circles. No human made this. The lump of metal in the centre is warm to the touch."
+    },
+    "magnet": {
+      "name": "horseshoe magnet",
+      "words": ["magnet", "horseshoe", "horseshoe magnet"],
+      "points": 5,
+      "desc": "A heavy red horseshoe magnet, super strong. It pulled itself free of the alien metal with a CLANG. Could be useful on another world.",
+      "pic": [
+        ["line", 2, 76, 66, 76, 71, 80, 73, 84, 71, 84, 66],
+        ["line", 2, 77, 66, 77, 71, 80, 72, 83, 71, 83, 66],
+        ["plot", 15, 76, 66, 77, 66, 83, 66, 84, 66]
+      ]
+    },
+    "falls": {
+      "name": "waterfall",
+      "words": ["waterfall", "falls", "water", "spray", "curtain", "opening"],
+      "scenery": true,
+      "desc": "A shimmering curtain of falling water. There's definitely an opening behind it."
+    },
+    "glowworms": {
+      "name": "glow-worms",
+      "words": ["worms", "glow worms", "glowworms", "glow", "ceiling"],
+      "scenery": true,
+      "desc": "Thousands of tiny glowing worms, twinkling like a private night sky."
+    },
+    "coin": {
+      "name": "silver coin",
+      "words": ["coin", "silver coin", "silver", "niche"],
+      "points": 5,
+      "desc": "A heavy silver coin stamped with a three-eyed crow. Someone, somewhere on the Starways, will want this.",
+      "pic": [["oval", 7, 112, 53, 2, 2], ["plot", 1, 111, 52]]
+    },
+    "graves": {
+      "name": "gravestones",
+      "words": [
+        "gravestone",
+        "gravestones",
+        "stone",
+        "stones",
+        "grave",
+        "graves",
+        "newest",
+        "newer",
+        "headstone",
+        "tombstone"
+      ],
+      "scenery": true,
+      "desc": "Crooked old gravestones. One is newer than the rest. You could READ it."
+    },
+    "crypt": {
+      "name": "crypt",
+      "words": ["crypt", "gate", "gates", "chains", "chain", "padlock", "lock"],
+      "scenery": true,
+      "desc": "Iron gates, chained and padlocked. The lock is an odd alien design - nothing like a normal key."
+    },
+    "key": {
+      "name": "brass key",
+      "words": ["key", "brass key"],
+      "points": 5,
+      "desc": "A small brass key with a star-shaped head. It doesn't fit anything on Grimmoor... yet.",
+      "pic": [["line", 7, 96, 90, 104, 90], ["oval", 7, 94, 90, 2, 2], ["plot", 7, 102, 91, 104, 91]]
+    },
+    "sky": {
+      "name": "sky",
+      "words": ["sky", "stars", "space", "glint", "heavens", "night sky", "up"],
+      "scenery": true,
+      "desc": "An ocean of stars. Something tiny glints, moving slowly against them."
+    },
+    "railing": {
+      "name": "railing",
+      "words": ["railing", "rail", "balcony", "edge"],
+      "scenery": true,
+      "desc": "A rusty iron railing. It wobbles worryingly."
+    },
+    "starchart": {
+      "name": "star chart",
+      "words": ["chart", "star chart", "map of stars"],
+      "points": 5,
+      "desc": "A crumpled chart of the Starways: seven worlds joined by faint dotted lines, and an eighth circled in red. Most of it is torn away.",
+      "read": "Seven worlds in a chain: GRIMMOOR at one end. Beyond the seventh, a red circle and a scribble: 'STARLING WRECK?'",
+      "pic": [["rect", 1, 108, 82, 9, 6], ["line", 6, 109, 83, 115, 86], ["plot", 2, 114, 84]]
     }
   },
   "actions": [
+    {
+      "verb": ["read", "examine"],
+      "noun": "carving",
+      "do": [
+        {
+          "say": "Carved deep into the bark, inside a lopsided heart: 'ZX + C64 4EVER'. Underneath, much smaller: 'LOAD \"\" ... press PLAY on tape.' Somebody else crash-landed here, a long time ago."
+        },
+        {"secret": "carving"}
+      ]
+    },
+    {
+      "verb": ["eat", "touch"],
+      "noun": "fungus",
+      "do": [
+        {"say": "You lean in to sniff it. It sniffs you back. You leave it alone."}
+      ]
+    },
+    {
+      "verb": ["cut", "touch", "pull"],
+      "noun": "webs",
+      "do": [
+        {
+          "say": "You touch a web. It TWANGS like a guitar string. Somewhere ahead, the clicking speeds up. Bad idea."
+        }
+      ]
+    },
+    {
+      "verb": "talk",
+      "noun": "gnome",
+      "do": [
+        {
+          "say": "The gnome's stone mouth creaks open: \"Hello, sailor!\" Then it freezes again, as if nothing happened."
+        },
+        {"secret": "gnome"}
+      ]
+    },
+    {
+      "verb": ["eat"],
+      "noun": "mushroom",
+      "do": [
+        {"say": "You decide that eating glowing things is how people end up with extra heads. Better keep it."}
+      ]
+    },
+    {
+      "verb": ["dance", "wait", "jump", "shout"],
+      "room": "cropcircle",
+      "do": [
+        {"say": "You stand in the centre of the circle and..."},
+        {
+          "say": "VWOOOM! A beam of light blasts down from the sky! A cow drifts slowly past you, upwards, looking embarrassed. The beam winks out. Nobody will ever believe you."
+        },
+        {"secret": "cow"}
+      ]
+    },
+    {
+      "verb": "shout",
+      "room": "cave",
+      "do": [
+        {"say": "\"HELLO!\" ... hello ... hello ... \"WHY ARE YOU SHOUTING AT WORMS?\" ... worms ... worms ..."},
+        {"secret": "echo"}
+      ]
+    },
+    {
+      "verb": ["read", "examine"],
+      "noun": "graves",
+      "do": [
+        {
+          "say": "The newest gravestone reads: 'HERE LIES BOB. HE TYPED GET LAMP ONE TIME TOO MANY.' The one beside it: 'R.I.P. - WALKED INTO THE BOG.' You feel strangely seen."
+        },
+        {"secret": "graves"}
+      ]
+    },
+    {
+      "verb": ["open", "unlock", "push", "pull"],
+      "noun": "crypt",
+      "do": [
+        {
+          "say": "The chains are rusted solid, and none of your keys fit that alien padlock. Whatever is in there can stay in there. For now."
+        }
+      ]
+    },
+    {
+      "verb": ["examine", "peer", "look"],
+      "noun": "sky",
+      "room": "balcony",
+      "do": [
+        {
+          "say": "You gaze up. Far, far beyond the clouds, a tiny glint moves slowly against the stars, blinking: short, short, long. A ship's distress beacon? Could part of the STARLING still be up there in orbit...?"
+        },
+        {"secret": "glint"}
+      ]
+    },
+    {
+      "verb": ["peer", "use"],
+      "noun": "telescope",
+      "if": "visited:balcony",
+      "once": true,
+      "do": [
+        {
+          "say": "You swing the telescope straight up. Through the slot in the roof, for a split second, you see it: a twisted piece of hull with STARLING painted on its side, tumbling slowly through orbit. Then a cloud drifts across."
+        },
+        {"secret": "starling"},
+        {"command": "look through telescope"}
+      ]
+    },
+    {
+      "verb": "jump",
+      "room": "balcony",
+      "noun": ["", "railing", "down"],
+      "do": [
+        {
+          "die": "You climb onto the railing for a better view. The view gets much better... and then much, much closer."
+        }
+      ]
+    },
+    {"verb": "climb", "room": "balcony", "noun": "railing", "do": [{"command": "jump"}]},
+    {
+      "verb": "jump",
+      "room": "waterfall",
+      "do": [
+        {
+          "say": "You jump into the pool below the falls. SPLOSH! Freezing! You clamber out, dripping and feeling very alive."
+        }
+      ]
+    },
+    {"verb": ["enter", "go"], "noun": "falls", "room": "waterfall", "do": [{"command": "go forward"}]},
+    {
+      "verb": "talk",
+      "noun": "k7",
+      "if": ["flag:k7_fixed", "flag:k7_heard", "!flag:k7_joke"],
+      "do": [
+        {"set": "k7_joke"},
+        {
+          "say": "\"QUERY: WHY DID THE ROBOT GO ON HOLIDAY? ANSWER: TO RECHARGE ITS BATTERIES. HA. HA. HA.\" K-7's visor flashes pink. It seems very pleased with itself."
+        },
+        {"secret": "robotjoke"}
+      ]
+    },
+    {
+      "verb": "talk",
+      "noun": "k7",
+      "if": ["flag:k7_fixed", "!flag:k7_heard"],
+      "do": [
+        {"set": "k7_heard"},
+        {
+          "say": "\"SYSTEMS RESTORED. THANK YOU. I am K-7. The portal machine in the stone ring needs a replacement FUSE - my master hid one in a tin under the altar. The guardian beast there is dangerous... but statistically it cannot resist a BONE. Use the telescope to find the way.\""
+        },
+        {"say": "(K-7 looks like it has more to say. Try talking again.)"}
+      ]
+    },
     {
       "verb": "use",
       "noun": "machine",

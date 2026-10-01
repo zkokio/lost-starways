@@ -114,6 +114,7 @@
           if (k === "score" && typeof v !== "number") err(w + ".score must be a number");
           if (k === "sound" && S.SOUNDS.indexOf(v) < 0) err(w + ".sound must be one of " + S.SOUNDS.join(", "));
           if (k === "die") text(v, w + ".die");
+          if (k === "secret" && typeof v !== "string") err(w + ".secret needs a short name, e.g. {\"secret\": \"carving\"}");
           if (k === "return" && p.type !== "side") warn(w + ": \"return\" only works in side packs");
         });
       });

@@ -90,3 +90,22 @@ game.newGame();
  ["turn candle off", "pinch out"], ["turn on candle", "relight"]].forEach(s => cmd(s[0], s[1]));
 console.log(failures ? "✖ switch problems" : "✔ SWITCH / TURN OK");
 process.exitCode = failures ? 1 : 0;
+
+// New places, collectables and secrets
+game.newGame();
+const st2 = () => game.state;
+["light candle","examine panel","cut red wire","f"].forEach(c => game.command(c));
+[["l", "Gloomwood"], ["read sign", "TURN BACK"], ["f", "The Gloomwood"], ["read carving", "SECRET FOUND"], ["f", "Heart of the Wood"],
+ ["take lantern", "5 POINTS"], ["f", "YOU HAVE DIED"]].forEach(s => cmd(s[0], s[1]));
+// after death we're back at the pod beacon (lantern lost) - check XYZZY and the rest quickly by teleporting
+[["xyzzy", "WRONG GAME"]].forEach(s => cmd(s[0], s[1]));
+function at(room){ game.state.room = "grimmoor:" + room; game.state.pack = "grimmoor"; }
+at("hut"); game.state.flags["grimmoor:hermit_fed"] = true;
+[["r", "Herb Garden"], ["talk to gnome", "Hello, sailor"], ["take mushroom", "TAKEN"], ["eat mushroom", "extra heads"]].forEach(s => cmd(s[0], s[1]));
+at("field"); [["r", "Crop Circle"], ["take magnet", "TAKEN"], ["dance", "cow"]].forEach(s => cmd(s[0], s[1]));
+at("stream"); [["r", "Silver Falls"], ["f", "Cave Behind"], ["take coin", "TAKEN"], ["shout", "WORMS"], ["b", "Silver Falls"]].forEach(s => cmd(s[0], s[1]));
+at("well"); [["l", "Graveyard"], ["read gravestone", "GET LAMP"], ["take key", "TAKEN"], ["f", "rusted solid"]].forEach(s => cmd(s[0], s[1]));
+at("observatory"); [["u", "Balcony"], ["take chart", "TAKEN"], ["look at sky", "glint"], ["climb down", "Observatory"], ["look through telescope", "STARLING"],
+ ["score", "SECRETS: 7"]].forEach(s => cmd(s[0], s[1]));
+console.log(failures ? "✖ new places problems" : "✔ New places & secrets OK");
+process.exitCode = failures ? 1 : 0;

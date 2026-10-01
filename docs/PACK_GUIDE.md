@@ -151,6 +151,7 @@ Flags belong to your pack. To read another pack's flag, write `core:flask_full`.
 | `sound` | `beep` `good` `bad` `part` `die` `beacon` `win` `portal` |
 | `die` | `{"die": "The floor gives way..."}` the player returns to the last beacon |
 | `command` | `{"command": "go up"}` run another command |
+| `secret` | `{"secret": "carving"}` an easter egg: +15 points and "SECRET FOUND" the first time (the name just has to be unique in your pack) |
 | `next` | `{"next": true}` go to the next main land (end your land with this) |
 | `return` | `{"return": true}` leave a side quest and go back to where it was entered |
 | `win` | `{"win": "You made it home!"}` the end of the whole game |
