@@ -17,10 +17,10 @@ Starways.addPack(
       "desc": [
         {
           "if": "flag:hatch_open",
-          "text": "The cramped escape pod, scorched and silent. The hatch hangs open AHEAD, letting in cold alien fog."
+          "text": "The cramped escape pod, scorched and silent. The hatch hangs open AHEAD, letting in cold alien fog. Two OXYGEN TANKS are strapped to the wall beside a battered RADIO."
         },
         {
-          "text": "You are strapped into a cramped escape pod. The warning lights are dead. A cracked control PANEL glints beside the jammed hatch AHEAD."
+          "text": "You are strapped into a cramped escape pod. The warning lights are dead. A cracked control PANEL glints beside the jammed hatch AHEAD. Two OXYGEN TANKS are strapped to the wall beside a battered RADIO."
         }
       ],
       "exits": {
@@ -30,7 +30,19 @@ Starways.addPack(
           "no": "The hatch is jammed shut. Something in the lock mechanism has seized."
         }
       },
-      "items": ["panel", "wires", "redwire", "bluewire", "hatch", "locker", "edriver"],
+      "items": [
+        "panel",
+        "wires",
+        "redwire",
+        "bluewire",
+        "hatch",
+        "locker",
+        "edriver",
+        "tanks",
+        "radio",
+        "lifejacket",
+        "flightlog"
+      ],
       "hint": [
         {"if": "!lit", "text": "It's dark. Check your INVENTORY - you have a candle and matches."},
         {"if": "!flag:locker_open", "text": "There's a LOCKER on the wall. OPEN it."},
@@ -103,9 +115,31 @@ Starways.addPack(
           ]
         },
         ["line", 2, 40, 99, 52, 86],
-        ["line", 2, 120, 99, 108, 86]
+        ["line", 2, 120, 99, 108, 86],
+        ["rect", 11, 106, 40, 22, 42],
+        ["rect", 3, 108, 44, 8, 36],
+        ["rect", 3, 118, 44, 8, 36],
+        ["oval", 3, 112, 44, 3, 2],
+        ["oval", 3, 122, 44, 3, 2],
+        ["line", 1, 109, 46, 109, 78],
+        ["line", 1, 119, 46, 119, 78],
+        ["rect", 11, 106, 52, 22, 2],
+        ["rect", 11, 106, 70, 22, 2],
+        ["rect", 15, 110, 38, 4, 3],
+        ["rect", 15, 120, 38, 4, 3],
+        ["plot", 2, 112, 37, 122, 37],
+        ["rect", 0, 36, 20, 20, 10],
+        ["rect", 11, 37, 21, 18, 8],
+        ["oval", 12, 42, 25, 3, 2],
+        ["plot", 13, 50, 23],
+        ["plot", 2, 52, 23],
+        ["line", 15, 54, 20, 58, 12]
       ],
-      "scan": "Power: none. Hatch lock circuit on the RED wire. BLUE wire carries 10,000 volts."
+      "scan": "Power: none. Hatch lock circuit on the RED wire. BLUE wire carries 10,000 volts.",
+      "extra": [
+        {"if": "here:lifejacket", "text": "An orange LIFE JACKET hangs on a hook by the hatch."},
+        {"if": "here:flightlog", "text": "The ship's FLIGHT LOG is wedged under the seat."}
+      ]
     },
     "crater": {
       "name": "Crash Crater",
@@ -1962,9 +1996,110 @@ Starways.addPack(
       "desc": "A crumpled chart of the Starways: seven worlds joined by faint dotted lines, and an eighth circled in red. Most of it is torn away.",
       "read": "Seven worlds in a chain: GRIMMOOR at one end. Beyond the seventh, a red circle and a scribble: 'STARLING WRECK?'",
       "pic": [["rect", 1, 108, 82, 9, 6], ["line", 6, 109, 83, 115, 86], ["plot", 2, 114, 84]]
+    },
+    "tanks": {
+      "name": "oxygen tanks",
+      "words": ["tanks", "tank", "oxygen", "oxygen tanks", "cylinders", "o2"],
+      "scenery": true,
+      "fixed": "They're bolted to the wall and weigh a ton. Grimmoor's air is breathable anyway - just a bit whiffy.",
+      "desc": "Two big oxygen tanks, bolted firmly to the wall. The gauges read FULL. Shame they won't come with you.",
+      "scan": "Oxygen: 98%. Mounting bolts: welded. Not removable."
+    },
+    "radio": {
+      "name": "radio",
+      "words": ["radio", "transmitter", "comms", "receiver"],
+      "scenery": true,
+      "fixed": "It's wired into the pod's hull.",
+      "desc": "A battered emergency radio with a cracked dial. You could try to USE it."
+    },
+    "lifejacket": {
+      "name": [
+        {"if": "flag:jacket_on", "text": "life jacket (wearing)"},
+        {"text": "life jacket"}
+      ],
+      "words": ["jacket", "life jacket", "lifejacket", "vest", "life vest"],
+      "points": 5,
+      "wearable": true,
+      "desc": "A bright orange inflatable life jacket, STARLING-issue. No water deep enough to need it on Grimmoor... but other worlds might be wetter.",
+      "pic": [
+        ["line", 15, 46, 38, 46, 43],
+        ["poly", 10, 38, 44, 44, 43, 46, 48, 48, 43, 54, 44, 55, 66, 37, 66],
+        ["line", 11, 44, 43, 46, 50, 48, 43],
+        ["line", 2, 46, 50, 46, 66],
+        ["rect", 7, 38, 52, 17, 2],
+        ["rect", 7, 38, 60, 17, 2],
+        ["line", 15, 37, 66, 55, 66]
+      ]
+    },
+    "flightlog": {
+      "name": "flight log",
+      "words": ["log", "flight log", "logbook", "tablet", "book"],
+      "points": 0,
+      "desc": "A cracked data tablet: the STARLING's flight log. READ it.",
+      "read": "STARLING FLIGHT LOG.  DAY 211: Wormhole storm dead ahead. Captain says 'it'll be fine.'  DAY 211 (LATER): It was not fine. Hull breach. Parts shearing off everywhere. Launching escape pod. If anyone finds this - the ship's parts are scattered across the STARWAYS. Collect all 21.",
+      "pic": [["rect", 11, 60, 92, 8, 4], ["rect", 3, 61, 93, 6, 2]]
     }
   },
   "actions": [
+    {
+      "verb": ["use", "listen", "push", "fix"],
+      "noun": "radio",
+      "do": [
+        {
+          "say": "You twiddle the dial. Static... hiss... then, very faintly: \"...STARLING... do you read... your parts are... scattered across... seven...\" KRRRK. Silence."
+        },
+        {"sound": "beep"}
+      ]
+    },
+    {
+      "verb": ["take", "pull", "use", "open"],
+      "noun": "tanks",
+      "do": [
+        {
+          "say": "You heave at the oxygen tanks. They don't budge - bolted and welded to the wall. Grimmoor's air is breathable anyway, just a bit whiffy."
+        }
+      ]
+    },
+    {
+      "verb": "wear",
+      "noun": "lifejacket",
+      "if": ["has:lifejacket", "!flag:jacket_on"],
+      "do": [
+        {"set": "jacket_on"},
+        {"say": "You pull on the life jacket and clip it shut. You look ridiculous, but you won't drown. Probably."}
+      ]
+    },
+    {"verb": "wear", "noun": "lifejacket", "if": "flag:jacket_on", "do": [{"say": "You're already wearing it."}]},
+    {"verb": "wear", "noun": "lifejacket", "do": [{"say": "Pick it up first."}]},
+    {
+      "verb": ["deactivate", "drop"],
+      "noun": "lifejacket",
+      "if": "flag:jacket_on",
+      "do": [
+        {"clear": "jacket_on"},
+        {"say": "You unclip the life jacket and carry it instead."}
+      ]
+    },
+    {
+      "verb": ["pull", "use"],
+      "noun": "lifejacket",
+      "if": "has:lifejacket",
+      "do": [
+        {
+          "say": "You yank the toggle. PFFFT! The jacket inflates... then slowly deflates again with a sad noise. Best save that for when you really need it."
+        }
+      ]
+    },
+    {
+      "verb": "jump",
+      "room": "waterfall",
+      "if": "flag:jacket_on",
+      "do": [
+        {
+          "say": "You leap into the pool below the falls and bob happily in your life jacket like a cork. Refreshing! You paddle back to the bank."
+        }
+      ]
+    },
     {
       "verb": ["read", "examine"],
       "noun": "carving",

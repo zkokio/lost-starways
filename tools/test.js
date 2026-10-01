@@ -109,3 +109,10 @@ at("observatory"); [["u", "Balcony"], ["take chart", "TAKEN"], ["look at sky", "
  ["score", "SECRETS: 7"]].forEach(s => cmd(s[0], s[1]));
 console.log(failures ? "✖ new places problems" : "✔ New places & secrets OK");
 process.exitCode = failures ? 1 : 0;
+
+// Pod extras
+game.newGame();
+[["light candle", "LIFE JACKET"], ["take tanks", "budge"], ["use radio", "STARLING"], ["take jacket", "5 POINTS"], ["wear jacket", "ridiculous"],
+ ["i", "WEARING"], ["take log", "TAKEN"], ["read log", "DAY 211"]].forEach(s => cmd(s[0], s[1]));
+console.log(failures ? "✖ pod problems" : "✔ Pod extras OK");
+process.exitCode = failures ? 1 : 0;
