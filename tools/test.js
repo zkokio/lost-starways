@@ -116,3 +116,15 @@ game.newGame();
  ["i", "WEARING"], ["take log", "TAKEN"], ["read log", "DAY 211"]].forEach(s => cmd(s[0], s[1]));
 console.log(failures ? "✖ pod problems" : "✔ Pod extras OK");
 process.exitCode = failures ? 1 : 0;
+
+// Save codes
+game.newGame();
+["light candle","examine panel","cut red wire","f","f"].forEach(c => game.command(c));   // reaches crossroads beacon
+log = []; game.command("code"); const code = log.find(l => /^LS1-/.test(l));
+if (!code) { failures++; console.log("✖ no save code"); }
+const game2 = new S.Engine({ out: t => log.push(t) }); game2.newGame();
+log = []; game2.command("load " + code);
+if (game2.state.room !== "grimmoor:crossroads" || !game2.state.flags["grimmoor:hatch_open"]) { failures++; console.log("✖ load code failed", game2.state.room, log.join("\n")); }
+log = []; game2.command("load LS1-notavalidcodeatall1234"); if (!/DOESN'T WORK/.test(log.join())) { failures++; console.log("✖ bad code not rejected"); }
+console.log(failures ? "✖ save code problems" : "✔ Save codes OK");
+process.exitCode = failures ? 1 : 0;

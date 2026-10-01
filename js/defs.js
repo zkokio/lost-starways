@@ -2,7 +2,7 @@
 (function (G) {
   var S = G.Starways = G.Starways || {};
 
-  S.VERSION = "0.3.1";
+  S.VERSION = "0.3.2";
   S.PARTS_TOTAL = 21;
   S.PIC_W = 160;   // picture is 160x100 "fat pixels", like C64 multicolour mode
   S.PIC_H = 100;
@@ -89,7 +89,8 @@
     restart: ["restart", "new game", "restart yes"],
     sound: ["sound", "sound on", "sound off", "sfx"],
     crt: ["crt", "scanlines"],
-    packs: ["packs", "mods", "lands"]
+    packs: ["packs", "mods", "lands"],
+    code: ["code", "save code", "savecode", "export", "share"]
   };
 
   S.STOPWORDS = ["the", "a", "an", "some", "my", "your", "this", "that", "here", "around", "please", "then", "carefully", "quickly"];

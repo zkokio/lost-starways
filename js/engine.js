@@ -574,6 +574,30 @@
     this.status();
   };
 
+  // Save codes: move a game between devices (base64 of the last beacon save)
+  E.saveCode = function () {
+    var snap = this.snapshot;
+    if (!snap) return null;
+    var json = JSON.stringify({ v: 1, s: snap });
+    var b64 = typeof btoa !== "undefined" ? btoa(unescape(encodeURIComponent(json))) : Buffer.from(json, "utf8").toString("base64");
+    return "LS1-" + b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  };
+  E.loadCode = function (code) {
+    var data = null;
+    try {
+      var b64 = String(code).trim().replace(/^LS1-/i, "").replace(/-/g, "+").replace(/_/g, "/");
+      var json = typeof atob !== "undefined" ? decodeURIComponent(escape(atob(b64))) : Buffer.from(b64, "base64").toString("utf8");
+      data = JSON.parse(json);
+    } catch (e) { data = null; }
+    if (!data || !data.s || !data.s.room) return this.say("THAT SAVE CODE DOESN'T WORK. Check you copied all of it.", "warn");
+    var missing = Object.keys(data.s.init || {}).filter(function (pid) { return !S.packs[pid]; });
+    if (missing.length) return this.say("THAT SAVE NEEDS THESE LANDS INSTALLED: " + missing.join(", ").toUpperCase(), "warn");
+    this.snapshot = clone(data.s);
+    var ls = store();
+    try { if (ls) ls.setItem(SAVE_KEY, JSON.stringify({ v: 1, packs: Object.keys(data.s.init), state: data.s })); } catch (e) { }
+    this.restore();
+  };
+
   E.rank = function () {
     var s = this.state.score, r = S.RANKS[0][1];
     S.RANKS.forEach(function (x) { if (s >= x[0]) r = x[1]; });
@@ -583,6 +607,8 @@
   /* ---------- command handling ---------- */
   E.command = function (text) {
     if (!this.state) return;
+    var lc = String(text).trim().match(/^(load|restore)\s+(\S{20,})$/i);
+    if (lc) return this.loadCode(lc[2]);
     var p = S.parse(text);
     if (!p) return this.say("EH?");
     if (p.system !== "restart") this.confirmRestart = false;
@@ -747,12 +773,19 @@
         return this.say([
           "MOVE: FORWARD BACK LEFT RIGHT UP DOWN (F B L R U D)",
           "TRY: LOOK, EXAMINE X, TAKE X, DROP X, USE X, OPEN, LIGHT, EXTINGUISH, CUT, THROW, DIG, EAT, DRINK, GIVE X TO Y, TYPE 1234, READ, PUSH, PULL, CLIMB, RUN, TALK TO, TIE, FILL, PUT X IN Y, LOOK THROUGH X...",
-          "I = INVENTORY   HINT = CLUE (-5)   SCORE   SAVE (AT BEACONS)   RESTORE   SOUND   CRT   MODS"
+          "I = INVENTORY   HINT = CLUE (-5)   SCORE   SAVE (AT BEACONS)   RESTORE   CODE (SAVE CODE FOR ANOTHER DEVICE)   GO TO <PLACE>   SOUND   CRT   MODS"
         ].join("\n"), "sys");
       case "save":
         if (this.rdef() && this.rdef().beacon) return this.beaconSave(false);
         return this.say("You can only save at a BEACON. Beacons also save automatically when you arrive.", "warn");
       case "restore": return this.restore();
+      case "code":
+        var code = this.saveCode();
+        if (!code) return this.say("Reach a BEACON first - that's where your game is saved.", "warn");
+        this.say("YOUR SAVE CODE (from your last beacon). On another device, open the game and type LOAD then paste this:", "good");
+        this.say(code, "sys");
+        if (this.io.copy && this.io.copy(code)) this.say("(Copied to your clipboard.)", "good");
+        return;
       case "restart":
         if (!this.confirmRestart && !st.ended && p.raw !== "restart yes") {
           this.confirmRestart = true;

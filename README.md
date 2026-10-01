@@ -16,6 +16,7 @@ You strike a match and light the candle. A warm glow pushes back the dark.
 - Characters to talk to: Zib the injured alien scout, Mags the three-eyed crow, Burble the frog-creature, K-7 the observatory robot, the hungry hermit, and a gnome with a secret
 - 24 locations in Grimmoor, including dead ends you'll regret (the Gloomwood!), hidden **secrets** (+15 each) and collectables you'll need on later worlds
 - **Beacons** are checkpoints. They save your progress automatically, and if you die you go back to the last one (−20 points).
+- **Continue anytime:** press RETURN on the title screen to carry on from your last beacon. Type `CODE` to get a save code, then `LOAD <code>` on another device to pick up the same game.
 - Sound effects made with the browser's built-in audio, a loading screen with border stripes, and optional CRT scanlines
 - **Community lands.** New maps and side quests are plain JSON files that anyone can write, paste into the game and share.
 

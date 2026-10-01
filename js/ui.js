@@ -87,6 +87,7 @@
     pic: function (ops, check, anim) { gfx.draw(ops, check, anim); },
     inventory: showInventory,
     crt: function () { $("screen").classList.toggle("crt"); },
+    copy: function (t) { try { navigator.clipboard.writeText(t); return true; } catch (e) { return false; } },
     mods: openMods
   });
 
@@ -96,8 +97,12 @@
     if (mode === "boot") return title();
     if (mode === "title") {
       mode = "play";
-      if (/^(restore|load|continue)$/i.test(v.trim())) { engine.newGame(); engine.restore(); }
-      else engine.newGame();
+      var w = v.trim();
+      var lc = w.match(/^(load|restore)\s+(\S{20,})$/i);
+      if (lc) { engine.loadCode(lc[2]); if (!engine.state) engine.newGame(); return; }
+      if (/^(new|new game|n)$/i.test(w) || !engine.hasSave()) return engine.newGame();
+      engine.restore();                      // don't start a new game first - it would overwrite the save
+      if (!engine.state) engine.newGame();
       return;
     }
     if (!v.trim()) return;
@@ -158,8 +163,11 @@
     print("LOST STARWAYS", "head");
     print("A text adventure across seven strange worlds.", "room");
     print("");
-    print("PRESS RETURN TO START A NEW GAME", "good");
-    if (engine.hasSave()) print("OR TYPE RESTORE TO CONTINUE", "good");
+    if (engine.hasSave()) {
+      print("PRESS RETURN TO CONTINUE YOUR SAVED GAME", "good");
+      print("(or type NEW for a new game)", "sys");
+    } else print("PRESS RETURN TO START A NEW GAME", "good");
+    print("Got a save code from another device? Type LOAD followed by the code.", "sys");
     print("");
     print("Type HELP at any time. TAB or I shows your inventory. MODS loads community lands.", "sys");
     print("V" + S.VERSION + "  -  (C) 2026 FLUSHTHEFASHION", "sys");
