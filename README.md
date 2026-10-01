@@ -27,6 +27,10 @@ No build step, no libraries, no dependencies. It's plain HTML, CSS and JavaScrip
 - **Online:** turn on GitHub Pages (see below) and open `https://<you>.github.io/lost-starways/`
 - **Locally:** double-click `index.html`
 
+## One-file version
+
+`dist/lost-starways.html` is the whole game in a single file (CSS, JavaScript, maps and fonts built in). You can email it, put it on any web host, or paste it into an AI app builder. `dist/lost-starways-import-prompt.txt` is a ready-made prompt with the code included. Rebuild both after changes with `python3 tools/bundle.py`.
+
 ## Project layout
 
 ```

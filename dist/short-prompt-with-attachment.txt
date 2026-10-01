@@ -1,0 +1,1 @@
+I've attached lost-starways.html. Please turn it into an artifact EXACTLY as written: don't rewrite, shorten, restyle or convert it to React. Keep all CSS, JavaScript, the embedded fonts and the map data. Render it so I can play. When I ask for changes later, edit only those parts.
